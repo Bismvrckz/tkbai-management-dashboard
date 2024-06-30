@@ -1,0 +1,57 @@
+{{define "essential.js"}}
+    <script type="text/javascript">
+        let API_URL = "{{.apiHost}}";
+        let BASE_URL = "{{.prefix}}";
+
+        function setCookie(name, value, days, path) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                expires = "; expires=" + date.toUTCString();
+            }
+
+            document.cookie = `${name}=${value}${expires}; path=${path}`;
+        }
+
+        function getCookie(cookieName) {
+            const name = cookieName + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(";");
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+                while (cookie.charAt(0) === " ") {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+            return "";
+        }
+
+        function deleteCookie(name, path) {
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`;
+        }
+
+        async function logOutUser() {
+            try {
+                // let accessToken = getCookie("accessToken")
+                deleteCookie("accessToken", "{{.prefix}}");
+                deleteCookie("refreshToken", "{{.prefix}}");
+                deleteCookie("idToken", "{{.prefix}}");
+                deleteCookie("expiry", "{{.prefix}}");
+                deleteCookie("logoImage", "{{.prefix}}");
+                window.location.href = `{{.apiHost}}{{.apiPrefix}}/auth/logout?idToken={{.idToken}}`;
+            } catch (error) {
+                console.log({error});
+            }
+        }
+    </script>
+
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="{{.webPublicPrefix}}/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+{{end}}

@@ -2,8 +2,6 @@ package main
 
 import (
 	"embed"
-	"github.com/gorilla/sessions"
-	"github.com/labstack/echo-contrib/session"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,6 +10,9 @@ import (
 	"tkbai/handler"
 	"tkbai/models"
 	"tkbai/routes"
+
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
