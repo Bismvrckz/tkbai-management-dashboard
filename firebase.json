@@ -1,0 +1,18 @@
+{
+  "emulators": {
+    "singleProjectMode": true,
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 9088
+    },
+    "database": {
+      "port": 9077
+    },
+    "ui": {
+      "enabled": true,
+      "port": 9066
+    }
+  }
+}
