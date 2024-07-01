@@ -9,12 +9,14 @@ func BuildRoutes(ein *config.Apps) {
 	web := ein.Tkbai.Group(config.AppPrefix, handler.WebMiddleware)
 	web.GET("/", handler.PublicDashboardView)
 	web.GET("/certificate/:id/name/:certHolder", handler.PublicCertificateDetail)
-	web.GET("/login/admin", handler.AdminLoginView)
-	web.POST("/login/admin", handler.AdminLogin)
+	web.GET("/admin/login", handler.AdminLoginView)
+	web.POST("/admin/login", handler.AdminLogin)
 
 	//ADMIN
 	//admin := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminGetCookieMid, handler.AdminValidateTokenMid)
-	web.GET("/dash", handler.AdminDashboardView)
+	web.GET("/admin/dashboard", handler.AdminDashboardView)
+	web.GET("/admin/add/csv", handler.AdminInputView)
+	web.POST("/admin/add/csv", handler.AdminUploadCSVCertificate)
 	//
 	//api := ein.Tkbai.Group(config.AppPrefix + config.ApiPrefix)
 	//
@@ -25,10 +27,10 @@ func BuildRoutes(ein *config.Apps) {
 	//api.POST("/entry/validate", handler.ValidateOIDC)
 	//
 	//// Admin
-	//api.GET("/admin/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
+	web.GET(config.AppPrefix+"/admin/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
 	//api.GET("/admin/data/toefl/all", handler.GetAllToeflCertificate)
-	//api.POST("/admin/data/toefl/csv", handler.UploadCSVCertificate)
+	//api.POST("/admin/data/toefl/csv", handler.AdminUploadCSVCertificate)
 	//
 	//// Certificate
-	//api.GET("/certificate/validate/id/:id/name/:certHolder", handler.ValidateCertificateByID)
+	web.GET("/certificate/validate/id/:id/name/:certHolder", handler.ValidateCertificateByID)
 }

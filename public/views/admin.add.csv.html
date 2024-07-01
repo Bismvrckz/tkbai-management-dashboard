@@ -1,4 +1,4 @@
-{{define "admin.dashboard"}}
+{{define "admin.add.csv"}}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -100,12 +100,15 @@
                                         class="d-flex align-items-center ms-3 ms-lg-4"
                                         id="kt_header_user_menu_toggle"
                                 >
+                                    <!--begin::Menu- wrapper-->
+                                    <!--begin::User icon(remove this button to use user avatar as menu toggle)-->
                                     <div
                                             class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px"
                                             data-kt-menu-trigger="click"
                                             data-kt-menu-attach="parent"
                                             data-kt-menu-placement="bottom-end"
                                     >
+                                        <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
                                         <span class="svg-icon svg-icon-1">
                                                 <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +132,10 @@
                                                     />
                                                 </svg>
                                             </span>
+                                        <!--end::Svg Icon-->
                                     </div>
+                                    <!--end::User icon-->
+                                    <!--begin::Menu-->
                                     <div
                                             class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
                                             data-kt-menu="true"
@@ -342,18 +348,19 @@
                 >
                     <!--begin::Post-->
                     <div class="content flex-row-fluid" id="kt_content">
-                        <!--begin::Card-->
-                        <div class="card">
-                            <!--begin::Card header-->
-                            <div class="card-header border-0 pt-6">
-                                <!--begin::Card toolbar-->
-                                <div class="card-toolbar">
-                                    <!--begin::Toolbar-->
+                        <form method="post" action="" enctype="multipart/form-data">
+                            <div class="card">
+                                <div class="card-header border-0 d-flex flex-column align-items-start p-10">
+                                    <div class="fv-row mb-10">
+                                        <label class="form-label fs-6 fw-bolder text-dark">CSV File</label>
+                                        <input required class="form-control form-control-lg form-control-solid" type="file" accept="text/csv"
+                                               name="csv"/>
+                                    </div>
                                     <div
                                             class="d-flex justify-content-end"
                                             data-kt-subscription-table-toolbar="base"
                                     >
-                                        <a href="{{.appPrefix}}/admin/add/csv" class="btn btn-primary">
+                                        <button type="submit"  class="btn btn-primary">
                                         <span class="svg-icon svg-icon-2">
                                                     <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -382,51 +389,11 @@
                                                         ></rect>
                                                     </svg>
                                                 </span>Tambah Data
-                                        </a>
+                                        </button>
                                     </div>
-                                    <!--end::Toolbar-->
                                 </div>
-                                <!--end::Card toolbar-->
                             </div>
-                            <!--end::Card header-->
-                            <!--begin::Card body-->
-                            <div class="card-body pt-0">
-                                <!--begin::Table-->
-                                <table
-                                        class="table align-middle table-row-dashed fs-6 gy-5"
-                                        id="test-table"
-                                >
-                                    <thead>
-                                    <tr
-                                            class="text-start text-muted fw-bolder fs-7 text-uppercase"
-                                    >
-                                        <th class="min-w-125px">Test ID</th>
-                                        <th class="min-w-125px">Name</th>
-                                        <th class="min-w-125px">Student Number</th>
-                                        <th class="min-w-125px">Major</th>
-                                        <th class="min-w-125px">Date of Test</th>
-                                        <th class="min-w-125px">TOEFL</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="text-gray-600 fw-bold">
-                                    {{range $index, $option := .listData}}
-                                        <tr>
-                                            <td>{{$option.TestID.String}}</td>
-                                            <td>{{$option.Name.String}}</td>
-                                            <td>{{$option.StudentNumber.String}}</td>
-                                            <td>{{$option.Major.String}}</td>
-                                            <td>{{$option.DateOfTest.String}}</td>
-                                            <td>{{$option.ToeflScore.String}}</td>
-                                        </tr>
-                                    {{end}}
-                                    </tbody>
-                                    <!--end::Table body-->
-                                </table>
-                                <!--end::Table-->
-                            </div>
-                            <!--end::Card body-->
-                        </div>
-                        <!--end::Card-->
+                        </form>
                     </div>
                     <!--end::Post-->
                 </div>
@@ -439,6 +406,7 @@
     <!--end::Root-->
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+        <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
         <span class="svg-icon">
                 <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -474,27 +442,27 @@
 
     <script>
         $("#test-table").DataTable({
-       // columnDefs: [
-       //     {
-       //         targets: 6,
-       //         orderable: false,
-       //     },
-       // ],
-{{/*            processing: true,*/}}
-{{/*            serverSide: true,*/}}
-{{/*            ajax: {*/}}
-{{/*                url: `{{.apiHost}}{{.apiPrefix}}/admin/data/toefl/all`,*/}}
-{{/*                type: "GET",*/}}
-{{/*            },*/}}
-{{/*            columns: [*/}}
-{{/*                {data: "testID"},*/}}
-{{/*                {data: "name"},*/}}
-{{/*                {data: "studentNumber"},*/}}
-{{/*                {data: "major"},*/}}
-{{/*                {data: "dateOfTest"},*/}}
-{{/*                {data: "toeflScore"},*/}}
-{{/*                {data: "insertDate"},*/}}
-{{/*            ],*/}}
+//        columnDefs: [
+//            {
+//                targets: 6,
+//                orderable: false,
+//            },
+//        ],
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: `{{.apiHost}}{{.apiPrefix}}/admin/data/toefl/all`,
+                type: "GET",
+            },
+            columns: [
+                {data: "testID"},
+                {data: "name"},
+                {data: "studentNumber"},
+                {data: "major"},
+                {data: "dateOfTest"},
+                {data: "toeflScore"},
+                {data: "insertDate"},
+            ],
         });
 
         $("#addDataInput").on('change', async function () {

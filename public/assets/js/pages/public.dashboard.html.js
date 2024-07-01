@@ -39,9 +39,9 @@ async function checkID() {
                     confirmButton: "btn btn-primary",
                 },
             }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = BASE_URL + `/certificate/${resValidate.additionalInfo.testID}/name/${resValidate.additionalInfo.name}`;
-                }
+                // if (result.isConfirmed) {
+                //     window.location.href = BASE_URL + `/certificate/${resValidate.additionalInfo.testID}/name/${resValidate.additionalInfo.name}`;
+                // }
             });
         } else {
             return Swal.fire({

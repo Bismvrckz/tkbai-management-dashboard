@@ -150,7 +150,7 @@ func WebMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
 		data := map[string]interface{}{}
 
-		if ctx.Path() != config.AppPrefix+"/login/admin" {
+		if ctx.Path() != config.AppPrefix+"/login/admin" && strings.Contains(ctx.Path(), "admin") {
 			sess, err := session.Get(config.SessionCookieName, ctx)
 			if err != nil {
 				return err
@@ -166,7 +166,7 @@ func WebMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		data["webPublicPrefix"] = config.WebPublicPrefix
-		data["prefix"] = config.AppPrefix
+		data["appPrefix"] = config.AppPrefix
 		data["apiHost"] = config.APIHost
 		data["apiPrefix"] = config.ApiPrefix
 

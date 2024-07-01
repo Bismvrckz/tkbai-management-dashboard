@@ -12,6 +12,7 @@ firebase-debug.*.log*
 .firebase/
 
 tmp/*
+tkbai
 
 # Firebase config
 

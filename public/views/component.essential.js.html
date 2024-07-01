@@ -34,20 +34,6 @@
         function deleteCookie(name, path) {
             document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`;
         }
-
-        async function logOutUser() {
-            try {
-                // let accessToken = getCookie("accessToken")
-                deleteCookie("accessToken", "{{.prefix}}");
-                deleteCookie("refreshToken", "{{.prefix}}");
-                deleteCookie("idToken", "{{.prefix}}");
-                deleteCookie("expiry", "{{.prefix}}");
-                deleteCookie("logoImage", "{{.prefix}}");
-                window.location.href = `{{.apiHost}}{{.apiPrefix}}/auth/logout?idToken={{.idToken}}`;
-            } catch (error) {
-                console.log({error});
-            }
-        }
     </script>
 
     <!--begin::Global Javascript Bundle(used by all pages)-->

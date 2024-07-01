@@ -9,12 +9,9 @@ import (
 )
 
 func PublicDashboardView(ctx echo.Context) (err error) {
-	return ctx.Render(http.StatusOK, "public.dashboard", map[string]interface{}{
-		"webPublicPrefix": config.WebPublicPrefix,
-		"prefix":          config.AppPrefix,
-		"apiHost":         config.APIHost,
-		"apiPrefix":       config.ApiPrefix,
-	})
+	data := ctx.Get("data").(map[string]interface{})
+
+	return ctx.Render(http.StatusOK, "public.dashboard", data)
 }
 
 func PublicCertificateDetail(ctx echo.Context) (err error) {

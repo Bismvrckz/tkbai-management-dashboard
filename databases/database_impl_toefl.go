@@ -9,14 +9,14 @@ import (
 )
 
 type ToeflCertificate struct {
-	ID            sql.NullInt64  `json:"id"`
-	TestID        sql.NullString `json:"testID"`
-	Name          sql.NullString `json:"name"`
-	StudentNumber sql.NullString `json:"studentNumber"`
-	Major         sql.NullString `json:"major"`
-	DateOfTest    sql.NullString `json:"dateOfTest"`
-	ToeflScore    sql.NullString `json:"toeflScore"`
-	InsertDate    sql.NullString `json:"insertDate"`
+	ID            sql.NullInt64  `json:"id" db:"id"`
+	TestID        sql.NullString `json:"testID" db:"test_id"`
+	Name          sql.NullString `json:"name" db:"name"`
+	StudentNumber sql.NullString `json:"studentNumber" db:"student_number" `
+	Major         sql.NullString `json:"major" db:"major"`
+	DateOfTest    sql.NullString `json:"dateOfTest" db:"date_of_test"`
+	ToeflScore    sql.NullString `json:"toeflScore" db:"toefl_score"`
+	InsertDate    sql.NullTime   `json:"insertDate" db:"insert_date"`
 }
 
 func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataAll(start, length string) (result []ToeflCertificate, err error) {
@@ -58,7 +58,7 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataAll(start, length string) (res
 }
 
 func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataBulk() (result []ToeflCertificate, err error) {
-	err = tkbaiDbImpl.ConnectTkbaiDB.Get(&result, "SELECT * FROM tkbai_data")
+	err = tkbaiDbImpl.ConnectTkbaiDB.Select(&result, "SELECT * FROM tkbai_data")
 	if err != nil {
 		config.LogErr(err, "Query Error")
 		return result, err
@@ -169,27 +169,24 @@ func (tkbaiDbImpl *TkbaiDbImplement) CreateCertificateBulk(certificates []ToeflC
 	return rowsAffected, err
 }
 
-func (tkbaiDbImpl *TkbaiDbImplement) CreateToeflCertificate(certificate ToeflCertificate) (rowsAffected int64, err error) {
-	funcName := "CreateToeflCertificate"
-	query := "INSERT INTO tkbai_data (test_id, name, student_number, major, date_of_test, toefl_score) VALUES (?,?,?,?,STR_TO_DATE(?, '%d-%b-%y'),?)"
-	rows, err := tkbaiDbImpl.ConnectTkbaiDB.Exec(query, certificate.TestID, certificate.Name, certificate.StudentNumber, certificate.Major, certificate.DateOfTest, certificate.ToeflScore)
+func (tkbaiDbImpl *TkbaiDbImplement) DeleteALlCertificate() (err error) {
+	query := "DELETE FROM tkbai_data "
+	_, err = tkbaiDbImpl.ConnectTkbaiDB.Exec(query)
 	if err != nil {
 		config.LogErr(err, "Query Error")
-		return rowsAffected, err
+		return err
 	}
 
-	rowsAffected, err = rows.RowsAffected()
+	return err
+}
+
+func (tkbaiDbImpl *TkbaiDbImplement) CreateToeflCertificate(certificate ToeflCertificate) (err error) {
+	query := "INSERT INTO tkbai_data (test_id, name, student_number, major, date_of_test, toefl_score) VALUES (?,?,?,?,?,?)"
+	_, err = tkbaiDbImpl.ConnectTkbaiDB.Exec(query, certificate.TestID, certificate.Name, certificate.StudentNumber, certificate.Major, certificate.DateOfTest, certificate.ToeflScore)
 	if err != nil {
-		config.LogErr(err, "Rows Error")
-		return rowsAffected, err
+		config.LogErr(err, "Query Error")
+		return err
 	}
 
-	if rowsAffected != 1 {
-		err = errors.New(fmt.Sprintf("expected single row affected, got %d rows affected", rows))
-		config.LogErr(err, "Rows Error")
-		return rowsAffected, err
-	}
-
-	config.LogTrc(funcName, "SUCCESS")
-	return rowsAffected, err
+	return err
 }

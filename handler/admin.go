@@ -2,7 +2,10 @@ package handler
 
 import (
 	"crypto/sha256"
+	"database/sql"
 	"encoding/base64"
+	"encoding/csv"
+	"fmt"
 	"net/http"
 	"tkbai/config"
 	"tkbai/databases"
@@ -19,7 +22,6 @@ func AdminLoginView(ctx echo.Context) (err error) {
 }
 
 func AdminLogin(ctx echo.Context) (err error) {
-	//data := ctx.Get("data").(map[string]interface{})
 	var body models.Login
 	err = ctx.Bind(&body)
 	if err != nil {
@@ -36,8 +38,10 @@ func AdminLogin(ctx echo.Context) (err error) {
 	shaPassword := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
 
 	if result.Password.String != shaPassword {
-		return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/login/admin")
+		return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 	}
+
+	fmt.Printf("success login\n")
 
 	sess, err := session.Get(config.SessionCookieName, ctx)
 	if err != nil {
@@ -57,7 +61,7 @@ func AdminLogin(ctx echo.Context) (err error) {
 		return err
 	}
 
-	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/dash")
+	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
 }
 
 func AdminDashboardView(ctx echo.Context) (err error) {
@@ -71,4 +75,58 @@ func AdminDashboardView(ctx echo.Context) (err error) {
 	data["listData"] = result
 
 	return ctx.Render(http.StatusOK, "admin.dashboard", data)
+}
+
+func AdminInputView(ctx echo.Context) (err error) {
+	data := ctx.Get("data").(map[string]interface{})
+
+	return ctx.Render(http.StatusOK, "admin.add.csv", data)
+}
+
+func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
+	file, err := ctx.FormFile("csv")
+	if err != nil {
+		return err
+	}
+
+	src, err := file.Open()
+	if err != nil {
+		return err
+	}
+
+	err = src.Close()
+	if err != nil {
+		return err
+	}
+
+	csvReader := csv.NewReader(src)
+	csvReader.Comma = ','
+
+	csvRecords, err := csvReader.ReadAll()
+
+	err = databases.DbTkbaiInterface.DeleteALlCertificate()
+	if err != nil {
+		return err
+	}
+
+	for i, csvRecord := range csvRecords {
+		if i == 0 {
+			continue
+		}
+
+		err = databases.DbTkbaiInterface.CreateToeflCertificate(databases.ToeflCertificate{
+			TestID:        sql.NullString{String: csvRecord[1], Valid: true},
+			Name:          sql.NullString{String: csvRecord[2], Valid: true},
+			StudentNumber: sql.NullString{String: csvRecord[3], Valid: true},
+			Major:         sql.NullString{String: csvRecord[4], Valid: true},
+			DateOfTest:    sql.NullString{String: csvRecord[5], Valid: true},
+			ToeflScore:    sql.NullString{String: csvRecord[6], Valid: true},
+		})
+		if err != nil {
+			return err
+		}
+
+	}
+
+	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
 }

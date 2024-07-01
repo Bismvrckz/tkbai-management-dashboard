@@ -3,8 +3,8 @@ package main
 import (
 	"embed"
 	"html/template"
-	"log"
 	"net/http"
+	"strings"
 	"tkbai/config"
 	"tkbai/databases"
 	"tkbai/handler"
@@ -66,7 +66,7 @@ func main() {
 
 	err := databases.ConnectTkbaiDatabase()
 	if err != nil {
-		log.Fatal(err)
+		config.LogErr(err, "Error connecting to database")
 	}
 
 	a.Tkbai.Logger.Fatal(a.Tkbai.Start(config.SERVERPort))
@@ -84,7 +84,11 @@ func initLoggingMiddleware(ein *config.Apps) {
 		LogRequestID: true,
 		LogError:     true,
 		LogMethod:    true,
-		LogValuesFunc: func(c echo.Context, values middleware.RequestLoggerValues) error {
+		LogValuesFunc: func(ctx echo.Context, values middleware.RequestLoggerValues) (err error) {
+			if strings.Contains(values.URI, "public") {
+				return err
+			}
+
 			if values.Error != nil {
 				logger.Error().
 					Str("URI", values.URI).
