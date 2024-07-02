@@ -34,10 +34,8 @@ func main() {
 
 	a.Tkbai = echo.New()
 
-	// recover
 	a.Tkbai.Use(middleware.Recover())
 
-	// set cors
 	a.Tkbai.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{config.WebHost, config.APIHost},
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PATCH, echo.PUT, echo.POST, echo.DELETE},
@@ -50,8 +48,25 @@ func main() {
 		SameSite: http.SameSiteStrictMode,
 	}
 
-	//Use session middleware
 	a.Tkbai.Use(session.Middleware(sessionStore))
+
+	a.Tkbai.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{""},
+		AllowMethods: []string{echo.GET, echo.HEAD, echo.PATCH, echo.PUT, echo.POST, echo.DELETE},
+	}))
+	a.Tkbai.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+		TokenLookup:    "form:_csrf",
+		CookieSameSite: http.SameSiteStrictMode,
+		CookieHTTPOnly: true,
+		CookieSecure:   true,
+	}))
+	a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+		XSSProtection:         "1; mode=block",
+		ContentTypeNosniff:    "nosniff",
+		XFrameOptions:         "SAMEORIGIN",
+		HSTSMaxAge:            2592000,
+		ContentSecurityPolicy: "default-src 'self' ;font-src 'self' fonts.googleapis.com fonts.gstatic.com; style-src 'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'nonce-" + config.ScriptSrcNonce + "' ; img-src 'self'",
+	}))
 
 	//logging
 	initLoggingMiddleware(a)

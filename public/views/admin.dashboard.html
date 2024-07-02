@@ -8,26 +8,10 @@
         <meta property="og:locale" content="en_US"/>
         <meta property="og:type" content="article"/>
         <link rel="shortcut icon" href="{{.webPublicPrefix}}/assets/media/logos/favicon.ico"/>
-        <!--begin::Fonts-->
-        <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
-        />
-        <!--end::Fonts-->
-        <!--begin::Page Vendor Stylesheets(used by this page)-->
-        <link
-                href="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.css"
-                rel="stylesheet"
-                type="text/css"
-        />
-        <!--end::Page Vendor Stylesheets-->
-        <!--begin::Global Stylesheets Bundle(used by all pages)-->
-        <link
-                href="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.css"
-                rel="stylesheet"
-                type="text/css"
-        />
-        <link href="{{.webPublicPrefix}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+        <link nonce="{{.styleNonce}}" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
+        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
         <!--end::Global Stylesheets Bundle-->
     </head>
     <!--begin::Body-->
@@ -150,11 +134,9 @@
                                                              viewBox="0 0 24 24" fill="none">
                                                             <path
                                                                     d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
-                                                                    fill="black" data-darkreader-inline-fill=""
-                                                                    style="--darkreader-inline-fill: #e8e6e3;"></path>
+                                                            ></path>
                                                             <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4"
-                                                                  fill="black" data-darkreader-inline-fill=""
-                                                                  style="--darkreader-inline-fill: #e8e6e3;"></rect>
+                                                            ></rect>
                                                         </svg>
                                                     </span>
                                                     </div>
@@ -470,31 +452,31 @@
 
     {{template "essential.js" .}}
 
-    <script src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
-    <script>
+    <script nonce="{{.scriptNonce}}">
         $("#test-table").DataTable({
-       // columnDefs: [
-       //     {
-       //         targets: 6,
-       //         orderable: false,
-       //     },
-       // ],
-{{/*            processing: true,*/}}
-{{/*            serverSide: true,*/}}
-{{/*            ajax: {*/}}
-{{/*                url: `{{.apiHost}}{{.apiPrefix}}/admin/data/toefl/all`,*/}}
-{{/*                type: "GET",*/}}
-{{/*            },*/}}
-{{/*            columns: [*/}}
-{{/*                {data: "testID"},*/}}
-{{/*                {data: "name"},*/}}
-{{/*                {data: "studentNumber"},*/}}
-{{/*                {data: "major"},*/}}
-{{/*                {data: "dateOfTest"},*/}}
-{{/*                {data: "toeflScore"},*/}}
-{{/*                {data: "insertDate"},*/}}
-{{/*            ],*/}}
+            // columnDefs: [
+            //     {
+            //         targets: 6,
+            //         orderable: false,
+            //     },
+            // ],
+            {{/*            processing: true,*/}}
+            {{/*            serverSide: true,*/}}
+            {{/*            ajax: {*/}}
+            {{/*                url: `{{.apiHost}}{{.apiPrefix}}/admin/data/toefl/all`,*/}}
+            {{/*                type: "GET",*/}}
+            {{/*            },*/}}
+            {{/*            columns: [*/}}
+            {{/*                {data: "testID"},*/}}
+            {{/*                {data: "name"},*/}}
+            {{/*                {data: "studentNumber"},*/}}
+            {{/*                {data: "major"},*/}}
+            {{/*                {data: "dateOfTest"},*/}}
+            {{/*                {data: "toeflScore"},*/}}
+            {{/*                {data: "insertDate"},*/}}
+            {{/*            ],*/}}
         });
 
         $("#addDataInput").on('change', async function () {

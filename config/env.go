@@ -17,10 +17,15 @@ var (
 	AdminLoginURL   = WebHost + AppPrefix + "/login/admin"
 	JwtKey          = GetEnv("BE_SV_JWT_KEY", "LmPZJbddZ9uXW4JE7g6N9R8ZdmDRv5vYihZJRBcOz7U=")
 
-	// ==================================================== ROUTING ==================================================== //
+	// ==================================================== SESSION ==================================================== //
 
 	SessionCookieName = GetEnv("SESSION_NAME", "TKBAI-SESSION")
 	AppSessionSecret  = GetEnv("SESSION_SECRET", "LmPZJbddZ9uXW4JE7g6N9R8ZdmDRv5vYihZJRBcOz7U=")
+
+	// ==================================================== NONCE ==================================================== //
+
+	StyleSrcNonce  = GetEnv("STYLE_NONCE", "K4qfk2XrYB6uE81e")
+	ScriptSrcNonce = GetEnv("SCRIPT_NONCE", "L4Mcme5VgMor9KF0")
 
 	// ==================================================== IAM ==================================================== //
 

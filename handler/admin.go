@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/csv"
 	"fmt"
+	"github.com/labstack/echo/v4/middleware"
 	"net/http"
 	"tkbai/config"
 	"tkbai/databases"
@@ -18,6 +19,7 @@ import (
 
 func AdminLoginView(ctx echo.Context) (err error) {
 	data := ctx.Get("data").(map[string]interface{})
+	data["csrf"] = ctx.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
 	return ctx.Render(http.StatusOK, "admin.login", data)
 }
 
