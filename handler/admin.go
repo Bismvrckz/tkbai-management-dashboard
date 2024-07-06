@@ -99,6 +99,7 @@ func AdminDashboardView(ctx echo.Context) (err error) {
 func AdminInputView(ctx echo.Context) (err error) {
 	data := ctx.Get("data").(map[string]interface{})
 
+	data["csrf"] = ctx.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
 	return ctx.Render(http.StatusOK, "admin.add.csv", data)
 }
 
