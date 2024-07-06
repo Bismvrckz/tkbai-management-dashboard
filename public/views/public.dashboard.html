@@ -3,29 +3,27 @@
     <html lang="en">
     <!--begin::Head-->
     <head>
-        <title>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati
-            debitis laborum, delectus corrupti aperiam asperiores consectetur dolorum
-            eum aliquam id possimus mollitia illum nihil libero repellendus ut! Amet,
-            quibusdam blanditiis.
-        </title>
+        <title>TKBAI - Validate Certificate</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta charset="utf-8"/>
         <meta property="og:locale" content="en_US"/>
         <meta property="og:type" content="article"/>
 
         <link
+                nonce="{{.scriptNonce}}"
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
         />
 
         <!--begin::Global Stylesheets Bundle(used by all pages)-->
         <link
+                nonce="{{.scriptNonce}}"
                 href="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.css"
                 rel="stylesheet"
                 type="text/css"
         />
         <link
+                nonce="{{.scriptNonce}}"
                 href="{{.webPublicPrefix}}/assets/css/style.bundle.css"
                 rel="stylesheet"
                 type="text/css"
@@ -413,7 +411,8 @@
                                                    class="form-control form-control-lg form-control-solid"
                                                    placeholder="ID Sertifikat"
                                             />
-                                            <div id="certificate-id-input-response" class="fv-plugins-message-container invalid-feedback"></div>
+                                            <div id="certificate-id-input-response"
+                                                 class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
 
                                         <div class="fv-row mb-10">
@@ -430,7 +429,8 @@
                                                    class="form-control form-control-lg form-control-solid"
                                                    placeholder="Nama Pemegang"
                                             />
-                                            <div id="certificate-holder-input-response" class="fv-plugins-message-container invalid-feedback"></div>
+                                            <div id="certificate-holder-input-response"
+                                                 class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -438,7 +438,7 @@
                                 <div class="d-flex flex-stack pt-10">
                                     <div>
                                         <button
-                                                onclick="checkID()"
+                                                id="checkIdButton"
                                                 type="button"
                                                 class="btn btn-lg btn-primary"
                                         >
@@ -485,25 +485,36 @@
     </div>
     <!--end::Main-->
 
-    <script>
+    {{template "essential.js" .}}
+
+
+    <script nonce="{{.scriptNonce}}"
+            src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}">
         var BASE_URL = "{{.appPrefix}}";
         var API_URL = "{{.appPrefix}}"
         $("#kt_datatable_zero_configuration").DataTable();
+
+
+        $("#checkIdButton").click(() => {
+            checkID()
+        });
     </script>
 
     <link href="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
           type="text/css"/>
-    <script src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}"
+            src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
     <!--begin::Javascript-->
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    <script src="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="{{.webPublicPrefix}}/assets/js/scripts.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
 
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{.webPublicPrefix}}/assets/js/custom/widgets.js"></script>
-    <script src="{{.webPublicPrefix}}/assets/js/pages/public.dashboard.html.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/js/custom/widgets.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/js/pages/public.dashboard.html.js"></script>
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
     </body>

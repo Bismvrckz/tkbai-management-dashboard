@@ -28,7 +28,6 @@ async function checkID() {
 
         const resValidate = await validate.json();
 
-        console.log(resValidate.additionalInfo)
         if (validate.status === 200) {
             Swal.fire({
                 text: "Sertifikat anda valid!",

@@ -439,9 +439,9 @@
 
     {{template "essential.js" .}}
 
-    <script src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.webPublicPrefix}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
-    <script>
+    <script nonce="{{.scriptNonce}}">
         $("#test-table").DataTable({
 //        columnDefs: [
 //            {

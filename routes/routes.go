@@ -6,24 +6,13 @@ import (
 )
 
 func BuildRoutes(ein *config.Apps) {
-	web := ein.Tkbai.Group(config.AppPrefix, handler.WebMiddleware)
-	web.GET("/", handler.PublicDashboardView)
+	// Public
+	web := ein.Tkbai.Group(config.AppPrefix, handler.PublicMiddleware)
+	web.GET("/dashboard", handler.PublicDashboardView)
 	web.GET("/certificate/:id/name/:certHolder", handler.PublicCertificateDetail)
 
-	//ADMIN
-	//admin := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminGetCookieMid, handler.AdminValidateTokenMid)
-	//
-	//api := ein.Tkbai.Group(config.AppPrefix + config.ApiPrefix)
-	//
-	//api.GET("/entry/login", handler.LoginOIDC)
-	//api.GET("/auth/loginCallback", handler.LoginCallbackOIDC)
-	//api.GET("/auth/logout", handler.LogoutOIDC)
-	//api.GET("/auth/logoutCallback", handler.LogoutCallbackOIDC)
-	//api.POST("/entry/validate", handler.ValidateOIDC)
-	//
-
 	// Admin
-	adminDash := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.WebMiddleware)
+	adminDash := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminMiddleware)
 	adminDash.GET(config.AppPrefix+"/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
 	adminDash.GET("/dashboard", handler.AdminDashboardView)
 	adminDash.GET("/add/csv", handler.AdminInputView)
@@ -33,7 +22,7 @@ func BuildRoutes(ein *config.Apps) {
 	adminDash.POST("/login", handler.AdminLogin)
 	//api.GET("/admin/data/toefl/all", handler.GetAllToeflCertificate)
 	//api.POST("/admin/data/toefl/csv", handler.AdminUploadCSVCertificate)
-	//
-	//// Certificate
+
+	// Certificate
 	web.GET("/certificate/validate/id/:id/name/:certHolder", handler.ValidateCertificateByID)
 }

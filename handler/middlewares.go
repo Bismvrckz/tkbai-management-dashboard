@@ -16,24 +16,45 @@ type TokenStruct struct {
 	IdToken      string
 }
 
-func WebMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+func AdminMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(ctx echo.Context) (err error) {
+		if strings.Contains(ctx.Path(), "*") {
+			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
+		}
+
 		data := map[string]interface{}{}
 
-		if ctx.Path() != config.AppPrefix+"/admin/login" && strings.Contains(ctx.Path(), "admin") {
-			sess, err := session.Get(config.SessionCookieName, ctx)
-			if err != nil {
-				return err
-			}
-
-			if sess.Values["UserEmail"] == nil {
-				sess.Options.MaxAge = -1
-				sess.Save(ctx.Request(), ctx.Response())
-				return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
-			}
-
-			data["UserEmail"] = sess.Values["UserEmail"].(string)
+		sess, err := session.Get(config.SessionCookieName, ctx)
+		if err != nil {
+			return err
 		}
+
+		if sess.Values["UserEmail"] == nil && ctx.Path() != config.AppPrefix+"/admin/login" {
+			sess.Options.MaxAge = -1
+			sess.Save(ctx.Request(), ctx.Response())
+			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
+		}
+
+		//TODO: possible nil pointer
+		data["UserEmail"] = sess.Values["UserEmail"].(string)
+		data["webPublicPrefix"] = config.WebPublicPrefix
+		data["appPrefix"] = config.AppPrefix
+		data["apiHost"] = config.APIHost
+		data["apiPrefix"] = config.ApiPrefix
+		data["styleNonce"] = config.StyleSrcNonce
+		data["scriptNonce"] = config.ScriptSrcNonce
+
+		ctx.Set("data", data)
+		return next(ctx)
+	}
+}
+
+func PublicMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(ctx echo.Context) (err error) {
+		if strings.Contains(ctx.Path(), "*") {
+			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/dashboard")
+		}
+		data := map[string]interface{}{}
 
 		data["webPublicPrefix"] = config.WebPublicPrefix
 		data["appPrefix"] = config.AppPrefix

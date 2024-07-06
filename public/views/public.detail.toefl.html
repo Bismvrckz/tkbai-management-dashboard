@@ -469,7 +469,7 @@
         </div>
     </div>
 
-    <script>
+    <script nonce="{{.scriptNonce}}">
         var BASE_URL = "{{.prefix}}";
         var API_URL = "{{.apiHost}}{{.apiPrefix}}"
         $("#kt_datatable_zero_configuration").DataTable();
@@ -477,13 +477,13 @@
 
     <link href="{{.prefix}}/static/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
           type="text/css"/>
-    <script src="{{.prefix}}/static/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.prefix}}/static/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
-    <script src="{{.prefix}}/static/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="{{.prefix}}/static/assets/js/scripts.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.prefix}}/static/assets/plugins/global/plugins.bundle.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.prefix}}/static/assets/js/scripts.bundle.js"></script>
 
-    <script src="{{.prefix}}/static/assets/js/custom/widgets.js"></script>
-    <script src="{{.prefix}}/static/assets/js/pages/public.dashboard.html.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.prefix}}/static/assets/js/custom/widgets.js"></script>
+    <script nonce="{{.scriptNonce}}" src="{{.prefix}}/static/assets/js/pages/public.dashboard.html.js"></script>
     </body>
     </html>
 {{end}}
