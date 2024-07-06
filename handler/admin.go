@@ -56,6 +56,7 @@ func AdminLogin(ctx echo.Context) (err error) {
 		Secure:   true,
 		SameSite: http.SameSiteStrictMode,
 		Path:     "/",
+		MaxAge:   900,
 	}
 
 	err = sess.Save(ctx.Request(), ctx.Response())
@@ -64,6 +65,22 @@ func AdminLogin(ctx echo.Context) (err error) {
 	}
 
 	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
+}
+
+func AdminLogout(ctx echo.Context) (err error) {
+	sess, _ := session.Get(config.SessionCookieName, ctx)
+
+	sess.Options = &sessions.Options{
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteStrictMode,
+		Path:     "/",
+		MaxAge:   -1,
+	}
+
+	sess.Save(ctx.Request(), ctx.Response())
+
+	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 }
 
 func AdminDashboardView(ctx echo.Context) (err error) {

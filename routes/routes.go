@@ -29,6 +29,7 @@ func BuildRoutes(ein *config.Apps) {
 	adminDash.GET("/add/csv", handler.AdminInputView)
 	adminDash.POST("/add/csv", handler.AdminUploadCSVCertificate)
 	adminDash.GET("/login", handler.AdminLoginView)
+	adminDash.GET("/logout", handler.AdminLogout)
 	adminDash.POST("/login", handler.AdminLogin)
 	//api.GET("/admin/data/toefl/all", handler.GetAllToeflCertificate)
 	//api.POST("/admin/data/toefl/csv", handler.AdminUploadCSVCertificate)
