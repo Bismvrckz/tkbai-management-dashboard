@@ -2,29 +2,24 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>SV - Admin Dashboard</title>
+        <title>Admin Dashboard | Tkbai</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta charset="utf-8"/>
         <meta property="og:locale" content="en_US"/>
         <meta property="og:type" content="article"/>
-        <link rel="shortcut icon" href="{{.webPublicPrefix}}/assets/media/logos/favicon.ico"/>
-        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/css/customs.css" rel="stylesheet" type="text/css"/>
-        <link nonce="{{.styleNonce}}" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
-        <link nonce="{{.styleNonce}}" href="{{.webPublicPrefix}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+        {{template "essential.css" .}}
     </head>
-
     <body id="kt_body" class="bg-body">
     <div class="d-flex flex-column flex-root">
-        <div
-                class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed sketchy-bg">
+        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed sketchy-bg">
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <a class="mb-12">
-                    <img alt="Logo" src="{{.webPublicPrefix}}/assets/media/logos/logo-1.svg" class="h-40px"/>
+                    <img alt="Logo" src="{{.webPublicPrefix}}/assets/media/logos/tkbai-lg-rmbg.png" class="h-100px"/>
                 </a>
                 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    <form method="post" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="/tkbai/admin/login">
-                        <input type="hidden" name="_csrf" value="{{.csrf}}" />
+                    <form method="post" class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
+                          action="/tkbai/admin/login">
+                        <input type="hidden" name="_csrf" value="{{.csrf}}"/>
                         <div class="text-center mb-10">
                             <h1 class="text-dark mb-3">Sign In</h1>
                         </div>
@@ -43,8 +38,6 @@
                         <div class="text-center">
                             <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
                                 <span class="indicator-label">Continue</span>
-                                <span class="indicator-progress">Please wait...
-									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                         </div>
                     </form>

@@ -29,14 +29,16 @@ func AdminMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return err
 		}
 
-		if sess.Values["UserEmail"] == nil && ctx.Path() != config.AppPrefix+"/admin/login" {
+		if sess.Values["userEmail"] == nil && ctx.Path() != config.AppPrefix+"/admin/login" {
 			sess.Options.MaxAge = -1
 			sess.Save(ctx.Request(), ctx.Response())
 			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 		}
 
-		//TODO: possible nil pointer
-		data["UserEmail"] = sess.Values["UserEmail"].(string)
+		if ctx.Path() != config.AppPrefix+"/admin/login" {
+			data["userEmail"] = sess.Values["userEmail"].(string)
+		}
+
 		data["webPublicPrefix"] = config.WebPublicPrefix
 		data["appPrefix"] = config.AppPrefix
 		data["apiHost"] = config.APIHost

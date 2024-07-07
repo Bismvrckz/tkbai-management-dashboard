@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"encoding/csv"
-	"fmt"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
 	"tkbai/config"
@@ -43,13 +42,13 @@ func AdminLogin(ctx echo.Context) (err error) {
 		return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 	}
 
-	fmt.Printf("success login\n")
+	config.LogTrc("ADMIN LOGIN", "success login")
 
 	sess, err := session.Get(config.SessionCookieName, ctx)
 	if err != nil {
 		return err
 	}
-	sess.Values["UserEmail"] = result.Email.String
+	sess.Values["userEmail"] = result.Email.String
 
 	sess.Options = &sessions.Options{
 		HttpOnly: true,
