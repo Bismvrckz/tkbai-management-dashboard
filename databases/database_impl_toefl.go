@@ -133,10 +133,10 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByIDAndName(certificateId, cer
 	return result, err
 }
 
-func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByID(certificateId string) (result ToeflCertificate, err error) {
+func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByIdOrName(credential string) (result ToeflCertificate, err error) {
 	funcName := "ViewToeflDataByID"
-	query := `SELECT * FROM tkbai_data WHERE test_id = ?`
-	rows, err := tkbaiDbImpl.ConnectTkbaiDB.Query(query, certificateId)
+	query := `SELECT * FROM tkbai_data WHERE test_id = ? OR name = ?`
+	rows, err := tkbaiDbImpl.ConnectTkbaiDB.Query(query, credential, credential)
 	if err != nil {
 		config.LogErr(err, "Query Error")
 		return result, err
@@ -144,7 +144,7 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByID(certificateId string) (re
 
 	if !rows.Next() {
 		err = errors.New("not found")
-		config.LogErr(err, fmt.Sprintf("Test ID %v not found", certificateId))
+		config.LogErr(err, fmt.Sprintf("Credential %v not found", credential))
 		return result, err
 	}
 

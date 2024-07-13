@@ -16,9 +16,9 @@ func PublicDashboardView(ctx echo.Context) (err error) {
 
 func PublicCertificateDetail(ctx echo.Context) (err error) {
 	data := ctx.Get("data").(map[string]interface{})
-	certificateId := ctx.FormValue("certificateId")
+	credential := ctx.FormValue("credential")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataByID(certificateId)
+	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(credential)
 	if err != nil {
 		if err.Error() == "not found" {
 			return ctx.Render(http.StatusOK, "public.detail.notfound", data)
