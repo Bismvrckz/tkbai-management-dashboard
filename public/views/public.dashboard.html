@@ -44,18 +44,18 @@
                                     <div class="card-body d-flex flex-column flex-lg-row flex-stack p-lg-15">
                                         <div class="d-flex flex-column justify-content-center align-items-center align-items-lg-start me-10 text-center text-lg-start">
                                             <h3 class="fs-2hx line-height-lg mb-5">
-                                                <span class="fw-bold">Verifikasi</span>
+                                                <span class="fw-bold">Unit Bahasa UIN K.H. Abdurrahman Wahid,</span>
                                                 <br/>
-                                                <span class="fw-bolder">menggunakan ID</span>
+                                                <span class="fw-bolder">Pekalongan</span>
                                             </h3>
                                             {{/*<div class="fs-4 text-muted mb-7">*/}}
                                             {{/*    Lorem ipsum dolor sit amer, <br/>consectetur*/}}
                                             {{/*    adipiscing elit.*/}}
                                             {{/*</div>*/}}
                                             <a href="#" class="btn btn-success fw-bold px-6 py-3" data-bs-toggle="modal"
-                                               data-bs-target="#kt_modal_create_app">Verifikasi Sekarang</a>
+                                               data-bs-target="#kt_modal_create_app">Verifikasi Sertifikat</a>
                                         </div>
-                                        <img src="{{.webPublicPrefix}}/assets/media/illustrations/sketchy-1/11.png"
+                                        <img src="{{.webPublicPrefix}}/assets/media/logos/tkbai-color.png"
                                              alt="" class="mw-200px mw-lg-350px mt-lg-n10"/>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
         <div class="modal-dialog modal-dialog-centered mw-900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Masukan ID</h2>
+                    <h2>Verifikasi Sertifikat Mahasiswa</h2>
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                         <span class="svg-icon svg-icon-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -94,16 +94,16 @@
                                         <div class="w-100">
                                             <div class="fv-row mb-10">
                                                 <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                                                    <span class="required">ID Sertifikat</span>
+                                                    <span class="required">ID Sertifikat / Mahasiswa</span>
                                                     <i class="fas fa-exclamation-circle ms-2 fs-7"
                                                        data-bs-toggle="tooltip"
-                                                       title="Sertifikat tidak boleh kosong"></i>
+                                                       title="Tidak boleh kosong"></i>
                                                 </label>
 
                                                 <input type="text" id="certificate-id"
                                                        name="certificateId"
                                                        class="form-control form-control-lg form-control-solid"
-                                                       placeholder="ID Sertifikat"/>
+                                                       placeholder="Masukan ID Sertifikat atau Nama Mahasiswa"/>
                                                 <div id="certificate-id-input-response"
                                                      class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
@@ -126,75 +126,6 @@
     </div>
 
     {{template "essential.js" .}}
-
-    <script nonce="{{.scriptNonce}}">
-        let BASE_URL = "{{.appPrefix}}";
-        $("#kt_datatable_zero_configuration").DataTable();
-
-        $("#checkIdButton").click(() => {
-            (async () => {
-                try {
-                    let certificate_id = document.getElementById("certificate-id");
-                    let inputResponse = document.getElementById("certificate-id-input-response");
-                    let certificate_holder = document.getElementById("certificate-holder");
-                    let certInputResponse = document.getElementById("certificate-holder-input-response");
-
-                    if (!certificate_id.value || !certificate_holder.value) {
-                        inputResponse.innerHTML = "<div>Tolong masukan ID anda</div>";
-                        certInputResponse.innerHTML = "<div>Tolong masukan Nama Pemegang</div>";
-
-                        return Swal.fire({
-                            icon: "error",
-                            title: "Gagal",
-                            text: "Tolong isi field dengan benar!",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn btn-danger",
-                            },
-                        });
-                    }
-
-                    const url =
-                        `${BASE_URL}/certificate/validate/id/${certificate_id.value}/name/${certificate_holder.value}`;
-
-                    const validate = await fetch(url);
-
-                    const resValidate = await validate.json();
-
-                    console.log({resValidate})
-
-                    if (validate.status === 200) {
-                        Swal.fire({
-                            text: "Sertifikat anda valid!",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "OK",
-                            customClass: {
-                                confirmButton: "btn btn-primary",
-                            },
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = BASE_URL + `/certificate/${btoa(resValidate.additionalInfo.testID.String)}`;
-                            }
-                        });
-                    } else {
-                        return Swal.fire({
-                            icon: "error",
-                            title: "Gagal",
-                            text: resValidate.message,
-                        });
-                    }
-                } catch (error) {
-                    return Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: error,
-                    });
-                }
-            })()
-        });
-    </script>
     </body>
     </html>
 {{end}}
