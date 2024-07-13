@@ -145,7 +145,7 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByID(certificateId string) (re
 	if !rows.Next() {
 		err = errors.New("not found")
 		config.LogErr(err, fmt.Sprintf("Test ID %v not found", certificateId))
-		return result, echo.ErrNotFound
+		return result, err
 	}
 
 	for rows.Next() {

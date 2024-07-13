@@ -10,6 +10,7 @@ func BuildRoutes(ein *config.Apps) {
 	web := ein.Tkbai.Group(config.AppPrefix, handler.PublicMiddleware)
 	web.GET("/dashboard", handler.PublicDashboardView)
 	web.GET("/certificate/:id", handler.PublicCertificateDetail)
+	web.POST("/detail", handler.PublicCertificateDetail)
 
 	// Admin
 	adminDash := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminMiddleware)

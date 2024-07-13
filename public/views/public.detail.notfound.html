@@ -1,0 +1,43 @@
+{{define "public.detail.notfound"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Unit Bahasa UIN K.H. Abdurrahman Wahid, Pekalongan</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="utf-8"/>
+        <meta property="og:locale" content="en_US"/>
+        <meta property="og:type" content="article"/>
+        {{template "essential.css" .}}
+    </head>
+    <body
+            id="kt_body"
+            class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled"
+    >
+    <div class="d-flex flex-column flex-root">
+        <div class="page d-flex flex-row flex-column-fluid">
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                {{template "public.header" .}}
+                <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+                    <div id="kt_toolbar_container" class="container-xxl py-5">
+                        <div class="card mb-5 mb-xl-10 bg-white">
+                            <div class="card-header">
+                                <div class="card-title m-0">
+                                    <h3 class="m-0">Sertifikat Tidak Ditemukan</h3>
+                                </div>
+                            </div>
+                            <div class="card-body p-9">
+                                <a href="{{.appPrefix}}/dashboard" type="button" class="btn btn-lg btn-primary">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "essential.js" .}}
+    </body>
+    </html>
+{{end}}
+
+
