@@ -133,6 +133,42 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByIDAndName(certificateId, cer
 	return result, err
 }
 
+func (tkbaiDbImpl *TkbaiDbImplement) ViewToeflDataByID(certificateId string) (result ToeflCertificate, err error) {
+	funcName := "ViewToeflDataByID"
+	query := `SELECT * FROM tkbai_data WHERE test_id = ?`
+	rows, err := tkbaiDbImpl.ConnectTkbaiDB.Query(query, certificateId)
+	if err != nil {
+		config.LogErr(err, "Query Error")
+		return result, err
+	}
+
+	if !rows.Next() {
+		err = errors.New("not found")
+		config.LogErr(err, fmt.Sprintf("Test ID %v not found", certificateId))
+		return result, echo.ErrNotFound
+	}
+
+	for rows.Next() {
+		err = rows.Scan(&result.ID, &result.TestID, &result.Name, &result.StudentNumber, &result.Major, &result.DateOfTest, &result.ToeflScore, &result.InsertDate)
+		if err != nil {
+			return result, err
+		}
+	}
+
+	if closeErr := rows.Close(); closeErr != nil {
+		config.LogErr(closeErr, "Rows Close Error")
+		return result, err
+	}
+
+	if err = rows.Err(); err != nil {
+		config.LogErr(err, "Rows Error")
+		return result, err
+	}
+
+	config.LogTrc(funcName, "SUCCESS")
+	return result, err
+}
+
 func (tkbaiDbImpl *TkbaiDbImplement) CreateCertificateBulk(certificates []ToeflCertificate) (rowsAffected int64, err error) {
 	var args []any
 	var parameterString string

@@ -9,11 +9,11 @@ func BuildRoutes(ein *config.Apps) {
 	// Public
 	web := ein.Tkbai.Group(config.AppPrefix, handler.PublicMiddleware)
 	web.GET("/dashboard", handler.PublicDashboardView)
-	web.GET("/certificate/:id/name/:certHolder", handler.PublicCertificateDetail)
+	web.GET("/certificate/:id", handler.PublicCertificateDetail)
 
 	// Admin
 	adminDash := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminMiddleware)
-	adminDash.GET(config.AppPrefix+"/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
+	adminDash.GET("/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
 	adminDash.GET("/dashboard", handler.AdminDashboardView)
 	adminDash.GET("/add/csv", handler.AdminInputView)
 	adminDash.POST("/add/csv", handler.AdminUploadCSVCertificate)

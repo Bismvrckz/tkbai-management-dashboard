@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 	"tkbai/databases"
@@ -65,6 +66,8 @@ func ValidateCertificateByID(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
+
+	fmt.Printf("result: %v\n", result.ID.Int64)
 
 	return ctx.JSON(http.StatusOK, models.Response{
 		ResponseCode:    "00",
