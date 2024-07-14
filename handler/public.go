@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
+	"strings"
 	"tkbai/databases"
 )
 
@@ -18,7 +19,7 @@ func PublicCertificateDetail(ctx echo.Context) (err error) {
 	data := ctx.Get("data").(map[string]interface{})
 	credential := ctx.FormValue("credential")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(credential)
+	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(strings.ToUpper(credential))
 	if err != nil {
 		if err.Error() == "not found" {
 			return ctx.Render(http.StatusOK, "public.detail.notfound", data)

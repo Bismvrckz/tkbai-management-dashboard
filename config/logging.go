@@ -1,9 +1,11 @@
 package config
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path"
+	"runtime"
 
 	"github.com/rs/zerolog"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -108,8 +110,10 @@ func LogErr(err error, msg string) {
 	Log.Error().Err(err).Msg(msg)
 }
 
-func LogTrc(funcName, msg string) {
-	Log.Trace().Str("FUNC", funcName).Msg(msg)
+func LogTrc(msg string) {
+	pc, file, line, _ := runtime.Caller(1)
+	Log.Trace().Str("FILENAME", file).Str("LINE", fmt.Sprint(line)).Str("FUNC", runtime.FuncForPC(pc).Name()).Msg(fmt.Sprintf("[%s]", msg))
+
 }
 
 func LogDbg(funcName, msg string) {

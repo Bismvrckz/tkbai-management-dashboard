@@ -7,6 +7,7 @@ import (
 	"encoding/csv"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
+	"strings"
 	"tkbai/config"
 	"tkbai/databases"
 	"tkbai/models"
@@ -42,7 +43,7 @@ func AdminLogin(ctx echo.Context) (err error) {
 		return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 	}
 
-	config.LogTrc("ADMIN LOGIN", "success login")
+	config.LogTrc("success login")
 
 	sess, err := session.Get(config.SessionCookieName, ctx)
 	if err != nil {
@@ -134,13 +135,14 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		}
 
 		err = databases.DbTkbaiInterface.CreateToeflCertificate(databases.ToeflCertificate{
-			TestID:        sql.NullString{String: csvRecord[1], Valid: true},
-			Name:          sql.NullString{String: csvRecord[2], Valid: true},
+			TestID:        sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
+			Name:          sql.NullString{String: strings.ToUpper(csvRecord[2]), Valid: true},
 			StudentNumber: sql.NullString{String: csvRecord[3], Valid: true},
 			Major:         sql.NullString{String: csvRecord[4], Valid: true},
 			DateOfTest:    sql.NullString{String: csvRecord[5], Valid: true},
 			ToeflScore:    sql.NullString{String: csvRecord[6], Valid: true},
 		})
+
 		if err != nil {
 			return err
 		}

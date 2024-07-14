@@ -7,7 +7,6 @@ type (
 		CountToeflDataAll() (result int64, err error)
 		ViewToeflDataByIDAndName(certificateId, certificateHolder string) (result ToeflCertificate, err error)
 		ViewToeflDataByIdOrName(credential string) (result ToeflCertificate, err error)
-		CreateCertificateBulk(certificates []ToeflCertificate) (rowsAffected int64, err error)
 		DeleteALlCertificate() (err error)
 		CreateToeflCertificate(certificate ToeflCertificate) (err error)
 
