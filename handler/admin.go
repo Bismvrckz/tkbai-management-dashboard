@@ -5,12 +5,12 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"encoding/csv"
-	"github.com/labstack/echo/v4/middleware"
 	"net/http"
 	"strings"
 	"tkbai/config"
 	"tkbai/databases"
 	"tkbai/models"
+	webtemplate "tkbai/webTemplate"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
@@ -18,9 +18,7 @@ import (
 )
 
 func AdminLoginView(ctx echo.Context) (err error) {
-	data := ctx.Get("data").(map[string]interface{})
-	data["csrf"] = ctx.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
-	return ctx.Render(http.StatusOK, "admin.login", data)
+	return webtemplate.AdminLogin().Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
 func AdminLogin(ctx echo.Context) (err error) {
@@ -84,23 +82,16 @@ func AdminLogout(ctx echo.Context) (err error) {
 }
 
 func AdminDashboardView(ctx echo.Context) (err error) {
-	data := ctx.Get("data").(map[string]interface{})
-
 	result, err := databases.DbTkbaiInterface.ViewToeflDataBulk()
 	if err != nil {
 		return err
 	}
 
-	data["listData"] = result
-
-	return ctx.Render(http.StatusOK, "admin.dashboard", data)
+	return webtemplate.AdminDashboard("", result).Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
 func AdminInputView(ctx echo.Context) (err error) {
-	data := ctx.Get("data").(map[string]interface{})
-
-	data["csrf"] = ctx.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
-	return ctx.Render(http.StatusOK, "admin.add.csv", data)
+	return webtemplate.AddCSV("").Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
 func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
@@ -123,6 +114,9 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 	csvReader.Comma = ','
 
 	csvRecords, err := csvReader.ReadAll()
+	if err != nil {
+		return err
+	}
 
 	err = databases.DbTkbaiInterface.DeleteALlCertificate()
 	if err != nil {
@@ -146,7 +140,6 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		if err != nil {
 			return err
 		}
-
 	}
 
 	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")

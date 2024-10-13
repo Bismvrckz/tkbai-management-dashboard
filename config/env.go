@@ -1,8 +1,9 @@
 package config
 
 import (
-	_ "github.com/joho/godotenv/autoload"
 	"os"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 var (
@@ -27,23 +28,9 @@ var (
 	StyleSrcNonce  = GetEnv("STYLE_NONCE", "K4qfk2XrYB6uE81e")
 	ScriptSrcNonce = GetEnv("SCRIPT_NONCE", "L4Mcme5VgMor9KF0")
 
-	// ==================================================== IAM ==================================================== //
+	// ==================================================== CSRF ==================================================== //
 
-	IAMURL                  = GetEnv("BE_KC_URL", "http://localhost:8080")
-	IAMDockerURL            = GetEnv("BE_KC_DOCKER_URL", "http://keycloak:8080")
-	IAMClientSecret         = GetEnv("BE_KC_SECRET", "rK4sSxVGdIjnEKnyBFzdymlN62stQ72m")
-	IAMClientID             = GetEnv("BE_KC_ID", "tkbai")
-	IAMRealm                = GetEnv("BE_KC_REALM", "tkbai_dev")
-	IAMState                = GetEnv("BE_KC_STATE", "authExt")
-	IAMConfigURL            = IAMURL + "/realms/" + IAMRealm
-	IAMDockerConfigURL      = IAMDockerURL + "/realms/" + IAMRealm
-	IAMLoginRedirectPath    = GetEnv("BE_KC_LOGIN_REDIRECT_PATH", "")
-	IAMLoginRedirect302Path = GetEnv("BE_KC_LOGIN_302REDIRECT_PATH", "")
-	IAMLogoutRedirectPath   = GetEnv("BE_KC_LOGOUT_REDIRECT_PATH", "")
-	IAMLoginRedirectURL     = APIHost + AppPrefix + IAMLoginRedirectPath
-	IAMLoginRedirect302URL  = WebHost + AppPrefix + IAMLoginRedirect302Path
-	IAMLogoutRedirectURL    = APIHost + AppPrefix + IAMLogoutRedirectPath
-	TkbaiDB                 = GetEnv("BE_TKBAI_DB_URL", "root:03IZmt7eRMukIHdoZahl@tcp(mysql:3306)/tkbai")
+	CsrfToken = GetEnv("CSRF_TOKEN", "1nLHl1Msf9cn0k+SPE1c0UJp1IxA6uH1jsxS2vnK")
 )
 
 func GetEnv(key, fallback string) (value string) {

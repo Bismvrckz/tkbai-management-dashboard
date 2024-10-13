@@ -1,33 +1,27 @@
 package handler
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"net/http"
 	"strings"
 	"tkbai/databases"
+	webtemplate "tkbai/webTemplate"
+
+	"github.com/labstack/echo/v4"
 )
 
 func PublicDashboardView(ctx echo.Context) (err error) {
-	data := ctx.Get("data").(map[string]interface{})
-	data["csrf"] = ctx.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
-
-	return ctx.Render(http.StatusOK, "public.dashboard", data)
+	return webtemplate.PublicDashboard().Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
 func PublicCertificateDetail(ctx echo.Context) (err error) {
-	data := ctx.Get("data").(map[string]interface{})
 	credential := ctx.FormValue("credential")
 
 	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(strings.ToUpper(credential))
 	if err != nil {
 		if err.Error() == "not found" {
-			return ctx.Render(http.StatusOK, "public.detail.notfound", data)
+			return webtemplate.DetailNotFound().Render(ctx.Request().Context(), ctx.Response().Writer)
 		}
 		return err
 	}
 
-	data["listData"] = result
-
-	return ctx.Render(http.StatusOK, "public.detail.toefl", data)
+	return webtemplate.StudentDetail(result).Render(ctx.Request().Context(), ctx.Response().Writer)
 }

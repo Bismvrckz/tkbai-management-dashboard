@@ -54,12 +54,6 @@ func main() {
 		AllowOrigins: []string{""},
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PATCH, echo.PUT, echo.POST, echo.DELETE},
 	}))
-	a.Tkbai.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
-		TokenLookup:    "form:_csrf",
-		CookieSameSite: http.SameSiteStrictMode,
-		CookieHTTPOnly: true,
-		CookieSecure:   true,
-	}))
 	a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
 		XSSProtection:         "1; mode=block",
 		ContentTypeNosniff:    "nosniff",
