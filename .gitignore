@@ -12,6 +12,7 @@ firebase-debug.*.log*
 .firebase/
 
 .DS_Store
+.idea/*
 
 tmp/*
 tkbai
