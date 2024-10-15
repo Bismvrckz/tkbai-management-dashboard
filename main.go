@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"html/template"
+	"log"
 	"net/http"
 	"strings"
 	"tkbai/config"
@@ -17,7 +18,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 var (
@@ -54,13 +54,13 @@ func main() {
 		AllowOrigins: []string{""},
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PATCH, echo.PUT, echo.POST, echo.DELETE},
 	}))
-	a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
-		XSSProtection:         "1; mode=block",
-		ContentTypeNosniff:    "nosniff",
-		XFrameOptions:         "SAMEORIGIN",
-		HSTSMaxAge:            2592000,
-		ContentSecurityPolicy: "default-src 'self' ;font-src 'self' fonts.googleapis.com fonts.gstatic.com; style-src 'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'nonce-" + config.ScriptSrcNonce + "' ; img-src data://* 'self' www.w3.org ",
-	}))
+	// a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+	// 	XSSProtection:         "1; mode=block",
+	// 	ContentTypeNosniff:    "nosniff",
+	// 	XFrameOptions:         "SAMEORIGIN",
+	// 	HSTSMaxAge:            2592000,
+	// 	ContentSecurityPolicy: "default-src 'self' ;font-src 'self' fonts.googleapis.com fonts.gstatic.com; style-src 'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'nonce-" + config.ScriptSrcNonce + "' ; img-src data://* 'self' www.w3.org ",
+	// }))
 
 	//'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com
 
@@ -78,6 +78,7 @@ func main() {
 	err := databases.ConnectTkbaiDatabase()
 	if err != nil {
 		config.LogErr(err, "Error connecting to database")
+		log.Fatal(err)
 	}
 
 	a.Tkbai.Logger.Fatal(a.Tkbai.Start(config.SERVERPort))

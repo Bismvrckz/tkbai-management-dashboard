@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/jmoiron/sqlx"
 	"time"
+
+	"github.com/jmoiron/sqlx"
 )
 
 var (
@@ -12,7 +13,7 @@ var (
 
 func TkbaiDbConnection() (db *sqlx.DB, err error) {
 	funcName := "TkbaiDbConnection"
-	db, err = sqlx.Open("sqlite3", "db/sqlite/tkbai.db")
+	db, err = sqlx.Open("mysql", DbUrl)
 	if err != nil {
 		Log.Err(err).Str("FUNC", funcName).Msg("")
 		return db, err

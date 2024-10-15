@@ -1,11 +1,12 @@
 package databases
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
+	"tkbai/config"
+
+	"cloud.google.com/go/firestore"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/option"
-	"tkbai/config"
 )
 
 func ConnectTkbaiDatabase() (err error) {
@@ -21,7 +22,7 @@ func ConnectTkbaiDatabase() (err error) {
 
 	DbTkbaiInterface = &TkbaiDbImplement{ConnectTkbaiDB: cmsDB}
 
-	return nil
+	return err
 }
 
 func ConnectTkbaiFirestore() (err error) {

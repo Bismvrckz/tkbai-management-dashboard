@@ -13,7 +13,7 @@ import (
 	"tkbai/databases"
 )
 
-func PublicHeader() templ.Component {
+func PublicHead() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -34,16 +34,53 @@ func PublicHeader() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<head><title>Unit Tata Kelola Siswa</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta charset=\"utf-8\"><meta property=\"og:locale\" content=\"en_US\"><meta property=\"og:type\" content=\"article\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = CSS().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func PublicHeader() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"kt_header\" class=\"header\" data-kt-sticky=\"true\" data-kt-sticky-name=\"header\" data-kt-sticky-offset=\"{default: &#39;200px&#39;, lg: &#39;300px&#39;}\"><div class=\"container-xxl d-flex flex-grow-1 flex-stack\"><div class=\"d-flex align-items-center me-5\"><div class=\"d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3\" id=\"kt_header_menu_toggle\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z\" fill=\"black\"></path> <path opacity=\"0.3\" d=\"M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z\" fill=\"black\"></path></svg></span></div><img alt=\"Logo\" src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/logos/tkbai-lg-rmbg.png")
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/logos/tkbai-lg-rmbg.png")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 20, Col: 90}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 31, Col: 90}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -71,51 +108,51 @@ func PublicDashboard() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var4 == nil {
+			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Unit Bahasa UIN K.H. Abdurrahman Wahid, Pekalongan</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta charset=\"utf-8\"><meta property=\"og:locale\" content=\"en_US\"><meta property=\"og:type\" content=\"article\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = CSS().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PublicHead().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\"><div id=\"kt_header\" class=\"header\" data-kt-sticky=\"true\" data-kt-sticky-name=\"header\" data-kt-sticky-offset=\"{default: &#39;200px&#39;, lg: &#39;300px&#39;}\"><div class=\"container-xxl d-flex flex-grow-1 flex-stack\"><div class=\"d-flex align-items-center me-5\"><div class=\"d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3\" id=\"kt_header_menu_toggle\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z\" fill=\"black\"></path> <path opacity=\"0.3\" d=\"M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z\" fill=\"black\"></path></svg></span></div><img alt=\"Logo\" src=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/logos/tkbai-lg-rmbg.png")
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 53, Col: 95}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"h-20px h-lg-80px\"></div></div><div class=\"separator\"></div></div><div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"row gy-0 gx-10\"><div class=\"col-xl-12\"><div class=\"card card-xl-stretch bg-body border-0 mb-5 mb-xl-0\"><div class=\"card-body d-flex flex-column justify-content-center align-items-center flex-lg-row flex-column-reverse p-lg-15\"><div class=\"d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start\"><h3 class=\"fs-2hx line-height-lg mb-5\"><span class=\"fw-bold\">Unit Bahasa UIN K.H. Abdurrahman Wahid,</span><br><span class=\"fw-bolder\">Pekalongan</span></h3><div class=\"fs-4 text-muted mb-7\">Lorem ipsum dolor sit amer,  <br>consectetur adipiscing elit.</div><a href=\"#\" class=\"btn btn-success fw-bold px-6 py-3\" data-bs-toggle=\"modal\" data-bs-target=\"#kt_modal_create_app\">Verifikasi Sertifikat</a></div><img src=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\"><div id=\"kt_header\" class=\"header\" data-kt-sticky=\"true\" data-kt-sticky-name=\"header\" data-kt-sticky-offset=\"{default: &#39;200px&#39;, lg: &#39;300px&#39;}\"><div class=\"container-xxl d-flex flex-grow-1 flex-stack\"><div class=\"d-flex align-items-center me-5\"><div class=\"d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3\" id=\"kt_header_menu_toggle\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z\" fill=\"black\"></path> <path opacity=\"0.3\" d=\"M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z\" fill=\"black\"></path></svg></span></div><img alt=\"Logo\" src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/logos/tkbai-color.png")
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/logos/tkbai-lg-rmbg.png")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 77, Col: 85}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 57, Col: 95}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"\" class=\"mw-200px mw-lg-350px mt-lg-n10\"></div></div></div></div></div></div><div class=\"card-body pt-0\"></div></div></div></div><div class=\"modal fade\" id=\"kt_modal_create_app\" tabindex=\"-1\" aria-hidden=\"true\"><div class=\"modal-dialog modal-dialog-centered mw-900px\"><div class=\"modal-content\"><div class=\"modal-header\"><h2>Verifikasi Sertifikat Tes Bahasa</h2><div class=\"btn btn-sm btn-icon btn-active-color-primary\" data-bs-dismiss=\"modal\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><rect opacity=\"0.5\" x=\"6\" y=\"17.3137\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(-45 6 17.3137)\" fill=\"black\"></rect> <rect x=\"7.41422\" y=\"6\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(45 7.41422 6)\" fill=\"black\"></rect></svg></span></div></div><div class=\"modal-body py-lg-10 px-lg-10\"><div class=\"d-flex flex-column flex-xl-row flex-row-fluid\" id=\"kt_modal_create_app_stepper\"><div class=\"flex-row-fluid py-lg-5 px-lg-15\"><div id=\"kt_modal_create_app_form\"><form action=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"h-20px h-lg-80px\"></div></div><div class=\"separator\"></div></div><div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"row gy-0 gx-10\"><div class=\"col-xl-12\"><div class=\"card card-xl-stretch bg-body border-0 mb-5 mb-xl-0\"><div class=\"card-body d-flex flex-column justify-content-between align-items-center flex-lg-row flex-column-reverse p-lg-15\"><div class=\"d-flex flex-column justify-content-center align-items-between align-items-lg-start text-center text-lg-start\"><h3 class=\"fs-2hx line-height-lg mb-5\"><span class=\"fw-bold\">Tata Kelola Badan Administrasi Individu,</span><br><span class=\"fw-bolder\">TKBAI</span></h3><div class=\"fs-4 text-muted mb-7\">Pusat kelola data administratif siswa,  <br>sekolah dasar.</div><a href=\"#\" class=\"btn btn-success fw-bold px-6 py-3\" data-bs-toggle=\"modal\" data-bs-target=\"#kt_modal_create_app\">Cari Data Siswa</a></div><img src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var6 templ.SafeURL = templ.URL(config.AppPrefix + "/detail")
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var6)))
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(config.WebPublicPrefix + "/assets/media/misc/bg-2.jpg")
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 81, Col: 77}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"\" class=\"rounded-circle mw-200px mw-lg-350px mt-lg-n10\"></div></div></div></div></div></div><div class=\"card-body pt-0\"></div></div></div></div><div class=\"modal fade\" id=\"kt_modal_create_app\" tabindex=\"-1\" aria-hidden=\"true\"><div class=\"modal-dialog modal-dialog-centered mw-900px\"><div class=\"modal-content\"><div class=\"modal-header\"><h2>Verifikasi Sertifikat Tes Bahasa</h2><div class=\"btn btn-sm btn-icon btn-active-color-primary\" data-bs-dismiss=\"modal\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><rect opacity=\"0.5\" x=\"6\" y=\"17.3137\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(-45 6 17.3137)\" fill=\"black\"></rect> <rect x=\"7.41422\" y=\"6\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(45 7.41422 6)\" fill=\"black\"></rect></svg></span></div></div><div class=\"modal-body py-lg-10 px-lg-10\"><div class=\"d-flex flex-column flex-xl-row flex-row-fluid\" id=\"kt_modal_create_app_stepper\"><div class=\"flex-row-fluid py-lg-5 px-lg-15\"><div id=\"kt_modal_create_app_form\"><form action=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 templ.SafeURL = templ.URL(config.AppPrefix + "/detail")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var7)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -159,20 +196,20 @@ func DetailNotFound() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var7 == nil {
-			templ_7745c5c3_Var7 = templ.NopComponent
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Unit Bahasa UIN K.H. Abdurrahman Wahid, Pekalongan</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta charset=\"utf-8\"><meta property=\"og:locale\" content=\"en_US\"><meta property=\"og:type\" content=\"article\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = CSS().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PublicHead().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -184,8 +221,8 @@ func DetailNotFound() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var8 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var8)))
+		var templ_7745c5c3_Var9 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var9)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -221,20 +258,20 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var9 == nil {
-			templ_7745c5c3_Var9 = templ.NopComponent
+		templ_7745c5c3_Var10 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var10 == nil {
+			templ_7745c5c3_Var10 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>Unit Bahasa UIN K.H. Abdurrahman Wahid, Pekalongan</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta charset=\"utf-8\"><meta property=\"og:locale\" content=\"en_US\"><meta property=\"og:type\" content=\"article\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = CSS().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PublicHead().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body id=\"kt_body\" class=\"header-fixed header-tablet-and-mobile-fixed toolbar-enabled\"><div class=\"d-flex flex-column flex-root\"><div class=\"page d-flex flex-row flex-column-fluid\"><div class=\"wrapper d-flex flex-column flex-row-fluid\" id=\"kt_wrapper\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -246,12 +283,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(c.TestID.String)
+		var templ_7745c5c3_Var11 string
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.TestID.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 207, Col: 30}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 197, Col: 30}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -259,12 +296,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.Name.String)
+		var templ_7745c5c3_Var12 string
+		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(c.Name.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 217, Col: 28}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 207, Col: 28}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -272,12 +309,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(c.StudentNumber.String)
+		var templ_7745c5c3_Var13 string
+		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(c.StudentNumber.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 226, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 216, Col: 37}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -285,12 +322,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var13 string
-		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(c.Major.String)
+		var templ_7745c5c3_Var14 string
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(c.Major.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 237, Col: 29}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 227, Col: 29}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -298,12 +335,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfTest.String)
+		var templ_7745c5c3_Var15 string
+		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfTest.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 245, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 34}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -311,12 +348,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var15 string
-		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.ToeflScore.String)
+		var templ_7745c5c3_Var16 string
+		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(c.ToeflScore.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 253, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 243, Col: 34}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -324,8 +361,8 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var16 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var16)))
+		var templ_7745c5c3_Var17 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var17)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

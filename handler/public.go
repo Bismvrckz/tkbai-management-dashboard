@@ -17,7 +17,7 @@ func PublicCertificateDetail(ctx echo.Context) (err error) {
 
 	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(strings.ToUpper(credential))
 	if err != nil {
-		if err.Error() == "not found" {
+		if err.Error() == "sql: no rows in result set" {
 			return webtemplate.DetailNotFound().Render(ctx.Request().Context(), ctx.Response().Writer)
 		}
 		return err
