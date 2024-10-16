@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"strings"
 	"tkbai/databases"
 	webtemplate "tkbai/webTemplate"
@@ -14,6 +15,8 @@ func PublicDashboardView(ctx echo.Context) (err error) {
 
 func PublicCertificateDetail(ctx echo.Context) (err error) {
 	credential := ctx.FormValue("credential")
+	csrf := ctx.FormValue("gorilla.csrf.Token")
+	fmt.Println(csrf)
 
 	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(strings.ToUpper(credential))
 	if err != nil {

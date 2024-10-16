@@ -3,25 +3,22 @@ package routes
 import (
 	"tkbai/config"
 	"tkbai/handler"
-
-	"github.com/gorilla/csrf"
-	"github.com/labstack/echo/v4"
 )
 
 func BuildRoutes(ein *config.Apps) {
 	// CSRF
-	csrfMid := csrf.Protect([]byte(config.CsrfToken))
+	//csrfMid := csrf.Protect([]byte(config.CsrfToken))
 
 	// Public
 	public := ein.Tkbai.Group(config.AppPrefix, handler.PublicMiddleware)
-	public.Use(echo.WrapMiddleware(csrfMid))
+	//public.Use(echo.WrapMiddleware(csrfMid))
 	public.GET("/dashboard", handler.PublicDashboardView)
 	public.GET("/certificate/:id", handler.PublicCertificateDetail)
 	public.POST("/detail", handler.PublicCertificateDetail)
 
 	// Admin
 	admin := ein.Tkbai.Group(config.AppPrefix+"/admin", handler.AdminMiddleware)
-	admin.Use(echo.WrapMiddleware(csrfMid))
+	//admin.Use(echo.WrapMiddleware(csrfMid))
 
 	admin.GET("/data/toefl/id/:id/name/:certHolder", handler.GetToeflCertificateByID)
 	admin.GET("/dashboard", handler.AdminDashboardView)

@@ -1,4 +1,4 @@
-CREATE DATABASE tkbai;
+CREATE DATABASE IF NOT EXISTS tkbai;
 
 USE tkbai;
 
