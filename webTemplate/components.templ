@@ -20,7 +20,9 @@ templ CSS() {
 }
 
 templ CSRF() {
-	<input type="hidden" name="gorilla.csrf.Token" value={ ctx.Value("gorilla.csrf.Token").(string) }/>
+    if ctx.Value("gorilla.csrf.Token") != nil{
+	    <input type="hidden" name="gorilla.csrf.Token" value={ ctx.Value("gorilla.csrf.Token").(string) }/>
+    }
 }
 
 templ ScrollTop() {
