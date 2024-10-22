@@ -15,7 +15,7 @@ func PublicDashboardView(ctx echo.Context) (err error) {
 func PublicCertificateDetail(ctx echo.Context) (err error) {
 	credential := ctx.FormValue("credential")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataByIdOrName(strings.ToUpper(credential))
+	result, err := databases.DbTkbaiInterface.ViewStudentDataByIdOrName(strings.ToUpper(credential))
 	if err != nil {
 		if err.Error() == "sql: no rows in result set" {
 			return webtemplate.DetailNotFound().Render(ctx.Request().Context(), ctx.Response().Writer)

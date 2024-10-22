@@ -2,13 +2,13 @@ package databases
 
 type (
 	TkbaiInterface interface {
-		ViewToeflDataAll(start, length string) (result []ToeflCertificate, err error)
-		ViewToeflDataBulk() (result []ToeflCertificate, err error)
-		CountToeflDataAll() (result int64, err error)
-		ViewToeflDataByIDAndName(certificateId, certificateHolder string) (result ToeflCertificate, err error)
-		ViewToeflDataByIdOrName(credential string) (result ToeflCertificate, err error)
-		DeleteALlCertificate() (err error)
-		CreateToeflCertificate(certificate ToeflCertificate) (err error)
+		ViewAllStudentData(start, length string) (result []StudentData, err error)
+		ViewStudentDataBulk() (result []StudentData, err error)
+		CountAllStudentData() (result int64, err error)
+		ViewStudentDataByIDAndName(certificateId, certificateHolder string) (result StudentData, err error)
+		ViewStudentDataByIdOrName(credential string) (result StudentData, err error)
+		DeleteALlStudentData() (err error)
+		CreateStudentData(certificate StudentData) (err error)
 
 		GetUserByEmail(email string) (user TkbaiUser, err error)
 	}

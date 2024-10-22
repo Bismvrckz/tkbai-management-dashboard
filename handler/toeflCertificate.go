@@ -14,22 +14,22 @@ func GetAllToeflCertificate(ctx echo.Context) (err error) {
 	start := ctx.QueryParam("start")
 	length := ctx.QueryParam("length")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataAll(start, length)
+	result, err := databases.DbTkbaiInterface.ViewAllStudentData(start, length)
 	if err != nil {
 		return err
 	}
 
-	resultCount, err := databases.DbTkbaiInterface.CountToeflDataAll()
+	resultCount, err := databases.DbTkbaiInterface.CountAllStudentData()
 	if err != nil {
 		return err
 
 	}
 
 	for i, each := range result {
-		dateOfTestSplit := strings.Split(each.DateOfTest.String, " ")
+		dateOfTestSplit := strings.Split(each.DateOfAdministration.String, " ")
 		//insertDateSplit := strings.Split(each.InsertDate.Time.String(), " ")
 
-		result[i].DateOfTest.String = dateOfTestSplit[0]
+		result[i].DateOfAdministration.String = dateOfTestSplit[0]
 		//result[i].InsertDate.Time. = insertDateSplit[0]
 	}
 
@@ -45,7 +45,7 @@ func GetToeflCertificateByID(ctx echo.Context) (err error) {
 	certificateId := ctx.Param("id")
 	certificateHolder := ctx.Param("certHolder")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataByIDAndName(certificateId, certificateHolder)
+	result, err := databases.DbTkbaiInterface.ViewStudentDataByIDAndName(certificateId, certificateHolder)
 	if err != nil {
 		return err
 
@@ -62,7 +62,7 @@ func ValidateCertificateByID(ctx echo.Context) error {
 	certificateId := ctx.Param("id")
 	certificateHolder := ctx.Param("certHolder")
 
-	result, err := databases.DbTkbaiInterface.ViewToeflDataByIDAndName(certificateId, certificateHolder)
+	result, err := databases.DbTkbaiInterface.ViewStudentDataByIDAndName(certificateId, certificateHolder)
 	if err != nil {
 		return err
 	}

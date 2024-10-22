@@ -134,7 +134,7 @@ func PublicDashboard() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"h-20px h-lg-80px\"></div></div><div class=\"separator\"></div></div><div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"row gy-0 gx-10\"><div class=\"col-xl-12\"><div class=\"card card-xl-stretch bg-body border-0 mb-5 mb-xl-0\"><div class=\"card-body d-flex flex-column justify-content-between align-items-center flex-lg-row flex-column-reverse p-lg-15\"><div class=\"d-flex flex-column justify-content-center align-items-between align-items-lg-start text-center text-lg-start\"><h3 class=\"fs-2hx line-height-lg mb-5\"><span class=\"fw-bold\">Tata Kelola Badan Administrasi Individu,</span><br><span class=\"fw-bolder\">TKBAI</span></h3><div class=\"fs-4 text-muted mb-7\">Pusat kelola data administratif siswa,  <br>sekolah dasar.</div><a href=\"#\" class=\"btn btn-success fw-bold px-6 py-3\" data-bs-toggle=\"modal\" data-bs-target=\"#kt_modal_create_app\">Cari Data Siswa</a></div><img src=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"h-20px h-lg-80px\"></div></div><div class=\"separator\"></div></div><div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"row gy-0 gx-10\"><div class=\"col-xl-12\"><div class=\"card card-xl-stretch bg-body border-0 mb-5 mb-xl-0\"><div class=\"card-body d-flex flex-column justify-content-between align-items-center flex-lg-row flex-column-reverse p-lg-15\"><div class=\"d-flex flex-column justify-content-center align-items-between align-items-lg-start text-center text-lg-start\"><h3 class=\"fs-2hx line-height-lg mb-5\"><span class=\"fw-bold\">Tata Kelola Badan Administrasi Individu,</span><br><span class=\"fw-bolder\">TKBAI</span></h3><div class=\"fs-4 text-muted mb-7\">Pusat kelola data administratif mahasiswa,<br>Universitas Lorem Ipsum.</div><a href=\"#\" class=\"btn btn-success fw-bold px-6 py-3\" data-bs-toggle=\"modal\" data-bs-target=\"#kt_modal_create_app\">Cari Data Mahasiswa</a></div><img src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -147,7 +147,7 @@ func PublicDashboard() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"\" class=\"rounded-circle mw-200px mw-lg-350px mt-lg-n10\"></div></div></div></div></div></div><div class=\"card-body pt-0\"></div></div></div></div><div class=\"modal fade\" id=\"kt_modal_create_app\" tabindex=\"-1\" aria-hidden=\"true\"><div class=\"modal-dialog modal-dialog-centered mw-900px\"><div class=\"modal-content\"><div class=\"modal-header\"><h2>Verifikasi Sertifikat Tes Bahasa</h2><div class=\"btn btn-sm btn-icon btn-active-color-primary\" data-bs-dismiss=\"modal\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><rect opacity=\"0.5\" x=\"6\" y=\"17.3137\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(-45 6 17.3137)\" fill=\"black\"></rect> <rect x=\"7.41422\" y=\"6\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(45 7.41422 6)\" fill=\"black\"></rect></svg></span></div></div><div class=\"modal-body py-lg-10 px-lg-10\"><div class=\"d-flex flex-column flex-xl-row flex-row-fluid\" id=\"kt_modal_create_app_stepper\"><div class=\"flex-row-fluid py-lg-5 px-lg-15\"><div id=\"kt_modal_create_app_form\"><form action=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"\" class=\"rounded-circle mw-200px mw-lg-350px mt-lg-n10\"></div></div></div></div></div></div><div class=\"card-body pt-0\"></div></div></div></div><div class=\"modal fade\" id=\"kt_modal_create_app\" tabindex=\"-1\" aria-hidden=\"true\"><div class=\"modal-dialog modal-dialog-centered mw-900px\"><div class=\"modal-content\"><div class=\"modal-header\"><h2>Verifikasi Data Mahasiswa</h2><div class=\"btn btn-sm btn-icon btn-active-color-primary\" data-bs-dismiss=\"modal\"><span class=\"svg-icon svg-icon-1\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><rect opacity=\"0.5\" x=\"6\" y=\"17.3137\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(-45 6 17.3137)\" fill=\"black\"></rect> <rect x=\"7.41422\" y=\"6\" width=\"16\" height=\"2\" rx=\"1\" transform=\"rotate(45 7.41422 6)\" fill=\"black\"></rect></svg></span></div></div><div class=\"modal-body py-lg-10 px-lg-10\"><div class=\"d-flex flex-column flex-xl-row flex-row-fluid\" id=\"kt_modal_create_app_stepper\"><div class=\"flex-row-fluid py-lg-5 px-lg-15\"><div id=\"kt_modal_create_app_form\"><form action=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -164,7 +164,7 @@ func PublicDashboard() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"current\" data-kt-stepper-element=\"content\"><div class=\"w-100\"><div class=\"fv-row mb-10\"><label class=\"d-flex align-items-center fs-5 fw-bold mb-2\"><span class=\"required\">ID Sertifikat / Mahasiswa</span> <i class=\"fas fa-exclamation-circle ms-2 fs-7\" data-bs-toggle=\"tooltip\" title=\"Tidak boleh kosong\"></i></label> <input type=\"text\" id=\"credential\" name=\"credential\" class=\"form-control form-control-lg form-control-solid\" placeholder=\"Masukan ID Sertifikat atau Nama Mahasiswa\"><div id=\"certificate-id-input-response\" class=\"fv-plugins-message-container invalid-feedback\"></div></div></div></div><div class=\"d-flex flex-stack pt-10\"><div><button type=\"submit\" class=\"btn btn-lg btn-primary\">Continue</button></div></div></form></div></div></div></div></div></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"current\" data-kt-stepper-element=\"content\"><div class=\"w-100\"><div class=\"fv-row mb-10\"><label class=\"d-flex align-items-center fs-5 fw-bold mb-2\"><span class=\"required\">ID / Nama Mahasiswa</span> <i class=\"fas fa-exclamation-circle ms-2 fs-7\" data-bs-toggle=\"tooltip\" title=\"Tidak boleh kosong\"></i></label> <input type=\"text\" id=\"credential\" name=\"credential\" class=\"form-control form-control-lg form-control-solid\" placeholder=\"Masukan ID atau Nama Mahasiswa\"><div id=\"certificate-id-input-response\" class=\"fv-plugins-message-container invalid-feedback\"></div></div></div></div><div class=\"d-flex flex-stack pt-10\"><div><button type=\"submit\" class=\"btn btn-lg btn-primary\">Continue</button></div></div></form></div></div></div></div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -242,7 +242,7 @@ func DetailNotFound() templ.Component {
 	})
 }
 
-func StudentDetail(c databases.ToeflCertificate) templ.Component {
+func StudentDetail(c databases.StudentData) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -279,20 +279,20 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header cursor-pointer\"><div class=\"card-title m-0\"><h3 class=\"fw-bolder m-0\">Detail Sertifikat</h3></div></div><div class=\"card-body p-9\"><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">ID Test</label><div class=\"col-lg-8 fv-row\"><span class=\"fw-bold text-gray-800 fs-6\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header cursor-pointer\"><div class=\"card-title m-0\"><h3 class=\"fw-bolder m-0\">Detail Mahasiswa</h3></div></div><div class=\"card-body p-9\"><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Student ID</label><div class=\"col-lg-8 fv-row\"><span class=\"fw-bold text-gray-800 fs-6\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.TestID.String)
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.StudentID.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 197, Col: 30}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 197, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Nama Pemegang <i class=\"fas fa-exclamation-circle ms-1 fs-7\" data-bs-toggle=\"tooltip\" title=\"Sesuai dengan nama ujian\"></i></label><div class=\"col-lg-8 d-flex align-items-center\"><span class=\"fw-bolder fs-6 text-gray-800 me-2\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Nama Mahasiswa</label><div class=\"col-lg-8 d-flex align-items-center\"><span class=\"fw-bolder fs-6 text-gray-800 me-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -331,12 +331,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Tanggal Test</label><div class=\"col-lg-8\"><span class=\"fw-bolder fs-6 text-gray-800\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Tanggal Masuk</label><div class=\"col-lg-8\"><span class=\"fw-bolder fs-6 text-gray-800\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var15 string
-		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfTest.String)
+		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfAdministration.String)
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 34}
 		}
@@ -344,25 +344,12 @@ func StudentDetail(c databases.ToeflCertificate) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"row mb-10\"><label class=\"col-lg-4 fw-bold text-muted\">Skor Test</label><div class=\"col-lg-8\"><span class=\"fw-bold fs-6 text-gray-800\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var16 string
-		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(c.ToeflScore.String)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 243, Col: 34}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var17 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var17)))
+		var templ_7745c5c3_Var16 templ.SafeURL = templ.URL(config.AppPrefix + "/dashboard")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var16)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -101,7 +101,7 @@ templ AddCSV(email string) {
 	</html>
 }
 
-templ AdminDashboard(email string, listData []databases.ToeflCertificate) {
+templ AdminDashboard(email string, listData []databases.StudentData) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -133,23 +133,21 @@ templ AdminDashboard(email string, listData []databases.ToeflCertificate) {
 										<table class="table align-middle table-row-dashed fs-6 gy-5" id="test-table">
 											<thead>
 												<tr class="text-start text-muted fw-bolder fs-7 text-uppercase">
-													<th class="min-w-125px">Test ID</th>
+													<th class="min-w-125px">Student ID</th>
 													<th class="min-w-125px">Name</th>
 													<th class="min-w-125px">Student Number</th>
 													<th class="min-w-125px">Major</th>
-													<th class="min-w-125px">Date of Test</th>
-													<th class="min-w-125px">TOEFL</th>
+													<th class="min-w-125px">Date of Administration</th>
 												</tr>
 											</thead>
 											<tbody class="text-gray-600 fw-bold">
 												for _, each := range listData {
 													<tr>
-														<td>{ each.TestID.String }</td>
+														<td>{ each.StudentID.String }</td>
 														<td>{ each.Name.String }</td>
 														<td>{ each.StudentNumber.String }</td>
 														<td>{ each.Major.String }</td>
 														<td>{ each.DateOfTest.String }</td>
-														<td>{ each.ToeflScore.String }</td>
 													</tr>
 												}
 											</tbody>

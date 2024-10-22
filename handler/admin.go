@@ -82,7 +82,7 @@ func AdminLogout(ctx echo.Context) (err error) {
 }
 
 func AdminDashboardView(ctx echo.Context) (err error) {
-	result, err := databases.DbTkbaiInterface.ViewToeflDataBulk()
+	result, err := databases.DbTkbaiInterface.ViewStudentDataBulk()
 	if err != nil {
 		return err
 	}
@@ -118,7 +118,7 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		return err
 	}
 
-	err = databases.DbTkbaiInterface.DeleteALlCertificate()
+	err = databases.DbTkbaiInterface.DeleteALlStudentData()
 	if err != nil {
 		return err
 	}
@@ -128,13 +128,12 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 			continue
 		}
 
-		err = databases.DbTkbaiInterface.CreateToeflCertificate(databases.ToeflCertificate{
-			TestID:        sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
-			Name:          sql.NullString{String: strings.ToUpper(csvRecord[2]), Valid: true},
-			StudentNumber: sql.NullString{String: csvRecord[3], Valid: true},
-			Major:         sql.NullString{String: csvRecord[4], Valid: true},
-			DateOfTest:    sql.NullString{String: csvRecord[5], Valid: true},
-			ToeflScore:    sql.NullString{String: csvRecord[6], Valid: true},
+		err = databases.DbTkbaiInterface.CreateStudentData(databases.StudentData{
+			StudentID:            sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
+			Name:                 sql.NullString{String: strings.ToUpper(csvRecord[2]), Valid: true},
+			StudentNumber:        sql.NullString{String: csvRecord[3], Valid: true},
+			Major:                sql.NullString{String: csvRecord[4], Valid: true},
+			DateOfAdministration: sql.NullString{String: csvRecord[5], Valid: true},
 		})
 
 		if err != nil {
