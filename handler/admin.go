@@ -129,11 +129,11 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		}
 
 		err = databases.DbTkbaiInterface.CreateStudentData(databases.StudentData{
-			StudentID:            sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
-			Name:                 sql.NullString{String: strings.ToUpper(csvRecord[2]), Valid: true},
-			StudentNumber:        sql.NullString{String: csvRecord[3], Valid: true},
-			Major:                sql.NullString{String: csvRecord[4], Valid: true},
-			DateOfAdministration: sql.NullString{String: csvRecord[5], Valid: true},
+			StudentID:            sql.NullString{String: strings.ToUpper(csvRecord[0]), Valid: true},
+			Name:                 sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
+			StudentNumber:        sql.NullString{String: csvRecord[2], Valid: true},
+			Major:                sql.NullString{String: csvRecord[3], Valid: true},
+			DateOfAdministration: sql.NullString{String: csvRecord[4], Valid: true},
 		})
 
 		if err != nil {

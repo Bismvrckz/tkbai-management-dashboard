@@ -252,7 +252,7 @@ func AdminDashboard(email string, listData []databases.StudentData) templ.Compon
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(each.DateOfAdministration.String)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `admin.templ`, Line: 150, Col: 42}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `admin.templ`, Line: 150, Col: 52}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {

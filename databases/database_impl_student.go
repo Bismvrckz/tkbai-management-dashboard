@@ -74,7 +74,7 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewStudentDataByIDAndName(studentID, stude
 }
 
 func (tkbaiDbImpl *TkbaiDbImplement) ViewStudentDataByIdOrName(credential string) (result StudentData, err error) {
-	query := `SELECT * FROM tkbai_data WHERE student_id = ? OR name = ?`
+	query := `SELECT * FROM tkbai_data WHERE student_number = ? OR name = ?`
 	err = tkbaiDbImpl.ConnectTkbaiDB.Get(&result, query, credential, credential)
 	if err != nil {
 		config.LogErr(err, "QUERY ERROR")

@@ -217,7 +217,7 @@ func DetailNotFound() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header\"><div class=\"card-title m-0\"><h3 class=\"m-0\">Sertifikat Tidak Ditemukan</h3></div></div><div class=\"card-body p-9\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header\"><div class=\"card-title m-0\"><h3 class=\"m-0\">Mahasiswa Tidak Ditemukan</h3></div></div><div class=\"card-body p-9\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -338,7 +338,7 @@ func StudentDetail(c databases.StudentData) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfAdministration.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
