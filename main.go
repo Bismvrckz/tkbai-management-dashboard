@@ -54,13 +54,13 @@ func main() {
 		AllowOrigins: []string{""},
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PATCH, echo.PUT, echo.POST, echo.DELETE},
 	}))
-	// a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
-	// 	XSSProtection:         "1; mode=block",
-	// 	ContentTypeNosniff:    "nosniff",
-	// 	XFrameOptions:         "SAMEORIGIN",
-	// 	HSTSMaxAge:            2592000,
-	// 	ContentSecurityPolicy: "default-src 'self' ;font-src 'self' fonts.googleapis.com fonts.gstatic.com; style-src 'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'nonce-" + config.ScriptSrcNonce + "' ; img-src data://* 'self' www.w3.org ",
-	// }))
+	a.Tkbai.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+		XSSProtection:         "1; mode=block",
+		ContentTypeNosniff:    "nosniff",
+		XFrameOptions:         "SAMEORIGIN",
+		HSTSMaxAge:            2592000,
+		ContentSecurityPolicy: "default-src 'self' ;font-src 'self' fonts.googleapis.com fonts.gstatic.com; style-src 'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'nonce-" + config.ScriptSrcNonce + "' ; img-src data://* 'self' www.w3.org ",
+	}))
 
 	//'nonce-" + config.StyleSrcNonce + "' 'self' fonts.googleapis.com fonts.gstatic.com
 

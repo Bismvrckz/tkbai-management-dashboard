@@ -30,6 +30,9 @@ func AdminLogin(ctx echo.Context) (err error) {
 
 	result, err := databases.DbTkbaiInterface.GetUserByEmail(body.Email)
 	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
+		}
 		return err
 	}
 
