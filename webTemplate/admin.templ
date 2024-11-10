@@ -5,6 +5,12 @@ import (
 	"tkbai/databases"
 )
 
+type Alert struct {
+	AlertTitle interface{}
+	AlertText  interface{}
+	AlertType  interface{}
+}
+
 templ adminHeader(userEmail string) {
 	<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
 		<div class="container-xxl d-flex flex-grow-1 flex-stack">
@@ -168,7 +174,7 @@ templ AdminDashboard(email string, listData []databases.StudentData) {
 	</html>
 }
 
-templ AdminLogin() {
+templ AdminLogin(alertMessage interface{}) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -213,6 +219,24 @@ templ AdminLogin() {
 				</div>
 			</div>
 			@Script()
+			<script nonce={ config.ScriptSrcNonce }>
+		        history.pushState(null, '', 'login');
+			</script>
+			if alertMessage != nil{
+			    <input type="hidden" id="alertMessage" value={ alertMessage.(string) }/>
+			    <script nonce={ config.ScriptSrcNonce }>
+		            swal.fire({
+                        title: "Login Gagal",
+                        text: document.getElementById("alertMessage").value,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "OK",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-light-primary"
+                        }
+                    });
+			    </script>
+			}
 		</body>
 	</html>
 }

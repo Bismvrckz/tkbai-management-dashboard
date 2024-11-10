@@ -18,7 +18,7 @@ import (
 )
 
 func AdminLoginView(ctx echo.Context) (err error) {
-	return webtemplate.AdminLogin().Render(ctx.Request().Context(), ctx.Response().Writer)
+	return webtemplate.AdminLogin(ctx.Get("alertMessage")).Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
 func AdminLogin(ctx echo.Context) (err error) {
@@ -31,7 +31,8 @@ func AdminLogin(ctx echo.Context) (err error) {
 	result, err := databases.DbTkbaiInterface.GetUserByEmail(body.Email)
 	if err != nil {
 		if err.Error() == "sql: no rows in result set" {
-			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
+			ctx.Set("alertMessage", "Email tidak terdaftar")
+			return AdminLoginView(ctx)
 		}
 		return err
 	}
@@ -41,7 +42,8 @@ func AdminLogin(ctx echo.Context) (err error) {
 	shaPassword := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
 
 	if result.Password.String != shaPassword {
-		return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
+		ctx.Set("alertMessage", "Password tidak sesuai")
+		return AdminLoginView(ctx)
 	}
 
 	config.LogTrc("success login")

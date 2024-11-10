@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -34,7 +35,14 @@ func main() {
 
 	a.Tkbai = echo.New()
 
-	a.Tkbai.Use(middleware.Recover())
+	a.Tkbai.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
+		StackSize: 1 << 10, // 1 KB
+		LogErrorFunc: func(ctx echo.Context, err error, stack []byte) error {
+			fmt.Println(string(stack))
+			config.Log.Error().Str("REQUEST", ctx.Request().URL.Path).Msg("[PANIC]")
+			return err
+		},
+	}))
 
 	a.Tkbai.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{config.WebHost, config.APIHost},
