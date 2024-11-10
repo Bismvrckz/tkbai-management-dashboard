@@ -16,6 +16,7 @@ firebase-debug.*.log*
 
 tmp/*
 tkbai
+tkbai_db/mysql_data/*
 
 # Firebase config
 

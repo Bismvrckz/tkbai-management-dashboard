@@ -1,0 +1,13 @@
+services:
+  mysql-percona:
+    image: percona:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 03IZmt7eRMukIHdoZahl
+      MYSQL_DEFAULT_DATABASE: tkbai
+    ports:
+      - "3306:3306"
+#    command: sh -c "mysql -u root -p03IZmt7eRMukIHdoZahl < files/init.sql"
+    volumes:
+      # - ./percona:/docker-entrypoint-initdb.d/
+      - ./mysql_data:/var/lib/mysql
+      - ./mysql_files:/files
