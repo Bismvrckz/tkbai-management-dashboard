@@ -3,7 +3,7 @@ package webtemplate
 import "tkbai/config"
 
 templ Script() {
-	<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/plugins/global/plugins.bundle.js" }></script>
+	<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/plugins/global/plugins.bundle.js" }></script> // JQuery
 	<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/js/scripts.bundle.js" }></script>
 	<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/plugins/custom/datatables/datatables.bundle.js" }></script>
 	<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/js/custom/widgets.js" }></script>

@@ -3,7 +3,7 @@ module tkbai
 go 1.22
 
 require (
-	cloud.google.com/go/firestore v1.15.0
+	cloud.google.com/go/firestore v1.14.0
 	github.com/a-h/templ v0.2.778
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
