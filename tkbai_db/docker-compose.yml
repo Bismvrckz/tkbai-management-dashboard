@@ -4,9 +4,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 03IZmt7eRMukIHdoZahl
       MYSQL_DEFAULT_DATABASE: tkbai
+      TZ: Asia/Jakarta
     ports:
       - "3307:3306"
-#    command: sh -c "mysql -u root -p03IZmt7eRMukIHdoZahl < files/init.sql"
+#    command: sh -c "mysql -u root -p03IZmt7eRMukIHdoZahl "USE mysql;" > /docker-entrypoint-initdb.d/timezones.sql &&  mysql_tzinfo_to_sql /usr/share/zoneinfo >> /docker-entrypoint-initdb.d/timezones.sql"
     volumes:
       # - ./percona:/docker-entrypoint-initdb.d/
       - ./mysql_data:/var/lib/mysql

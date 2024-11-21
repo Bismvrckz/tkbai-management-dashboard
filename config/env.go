@@ -15,7 +15,6 @@ var (
 	WebHost         = GetEnv("BE_WEB_HOST", "http://localhost:9071")
 	APIHost         = "http://localhost" + SERVERPort
 	AppPrefix       = GetEnv("BE_BASE_URL", "/tkbai")
-	AdminLoginURL   = WebHost + AppPrefix + "/login/admin"
 	JwtKey          = GetEnv("BE_SV_JWT_KEY", "LmPZJbddZ9uXW4JE7g6N9R8ZdmDRv5vYihZJRBcOz7U=")
 	DbUrl           = GetEnv("DB_URL", "tkbai:rytdin-ryqriN-kohqi6@tcp(127.0.0.1:3306)/tkbai?parseTime=true")
 

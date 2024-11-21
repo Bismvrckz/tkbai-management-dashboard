@@ -8,22 +8,8 @@ import (
 	"tkbai/config"
 )
 
-type TokenStruct struct {
-	AccessToken  string
-	Expiry       string
-	Message      string
-	RefreshToken string
-	IdToken      string
-}
-
 func AdminMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(ctx echo.Context) (err error) {
-		if strings.Contains(ctx.Path(), "*") {
-			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
-		}
-
-		data := map[string]interface{}{}
-
 		sess, err := session.Get(config.SessionCookieName, ctx)
 		if err != nil {
 			return err
@@ -35,37 +21,10 @@ func AdminMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 		}
 
-		if ctx.Path() != config.AppPrefix+"/admin/login" {
-			data["userEmail"] = sess.Values["userEmail"].(string)
-		}
-
-		data["webPublicPrefix"] = config.WebPublicPrefix
-		data["appPrefix"] = config.AppPrefix
-		data["apiHost"] = config.APIHost
-		data["apiPrefix"] = config.ApiPrefix
-		data["styleNonce"] = config.StyleSrcNonce
-		data["scriptNonce"] = config.ScriptSrcNonce
-
-		ctx.Set("data", data)
-		return next(ctx)
-	}
-}
-
-func PublicMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(ctx echo.Context) (err error) {
 		if strings.Contains(ctx.Path(), "*") {
-			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/dashboard")
+			return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
 		}
-		data := map[string]interface{}{}
 
-		data["webPublicPrefix"] = config.WebPublicPrefix
-		data["appPrefix"] = config.AppPrefix
-		data["apiHost"] = config.APIHost
-		data["apiPrefix"] = config.ApiPrefix
-		data["styleNonce"] = config.StyleSrcNonce
-		data["scriptNonce"] = config.ScriptSrcNonce
-
-		ctx.Set("data", data)
 		return next(ctx)
 	}
 }

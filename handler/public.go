@@ -8,11 +8,13 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+//======================= VIEWS =======================//
+
 func PublicDashboardView(ctx echo.Context) (err error) {
 	return webtemplate.PublicDashboard().Render(ctx.Request().Context(), ctx.Response().Writer)
 }
 
-func PublicCertificateDetail(ctx echo.Context) (err error) {
+func PublicStudentDetailView(ctx echo.Context) (err error) {
 	credential := ctx.FormValue("credential")
 
 	result, err := databases.DbTkbaiInterface.ViewStudentDataByIdOrName(strings.ToUpper(credential))
@@ -25,3 +27,5 @@ func PublicCertificateDetail(ctx echo.Context) (err error) {
 
 	return webtemplate.StudentDetail(result).Render(ctx.Request().Context(), ctx.Response().Writer)
 }
+
+//======================= VIEWS =======================//

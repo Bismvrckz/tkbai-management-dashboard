@@ -279,14 +279,14 @@ func StudentDetail(c databases.StudentData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header cursor-pointer\"><div class=\"card-title m-0\"><h3 class=\"fw-bolder m-0\">Detail Mahasiswa</h3></div></div><div class=\"card-body p-9\"><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Student ID</label><div class=\"col-lg-8 fv-row\"><span class=\"fw-bold text-gray-800 fs-6\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"toolbar py-5 py-lg-5\" id=\"kt_toolbar\"><div id=\"kt_toolbar_container\" class=\"container-xxl py-5\"><div class=\"card mb-5 mb-xl-10 bg-white\"><div class=\"card-header cursor-pointer\"><div class=\"card-title m-0\"><h3 class=\"fw-bolder m-0\">Detail Mahasiswa</h3></div></div><div class=\"card-body p-9\"><div class=\"row mb-7\"><label class=\"col-lg-4 fw-bold text-muted\">Student Address</label><div class=\"col-lg-8 fv-row\"><span class=\"fw-bold text-gray-800 fs-6\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var11 string
-		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.StudentID.String)
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(c.StudentAddress.String)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 197, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 197, Col: 38}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
@@ -336,9 +336,9 @@ func StudentDetail(c databases.StudentData) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var15 string
-		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.DateOfAdministration.String)
+		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(c.InsertDate.Time.Format("02, January 2006"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `public.templ`, Line: 235, Col: 59}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
