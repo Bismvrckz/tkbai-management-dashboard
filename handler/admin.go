@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"encoding/csv"
+	"fmt"
 	"net/http"
 	"strings"
 	"tkbai/config"
@@ -17,9 +18,26 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+//======================= VIEWS =======================//
+
 func AdminLoginView(ctx echo.Context) (err error) {
 	return webtemplate.AdminLogin(ctx.Get("alertMessage")).Render(ctx.Request().Context(), ctx.Response().Writer)
 }
+
+func AdminDashboardView(ctx echo.Context) (err error) {
+	result, err := databases.DbTkbaiInterface.ViewStudentDataBulk()
+	if err != nil {
+		return err
+	}
+
+	return webtemplate.AdminDashboard(ctx.Get("alertType"), ctx.Get("alertTitle"), ctx.Get("alertMessage"), result).Render(ctx.Request().Context(), ctx.Response().Writer)
+}
+
+func AdminInputView(ctx echo.Context) (err error) {
+	return webtemplate.AddCSV().Render(ctx.Request().Context(), ctx.Response().Writer)
+}
+
+//======================= VIEWS =======================//
 
 func AdminLogin(ctx echo.Context) (err error) {
 	var body models.Login
@@ -86,20 +104,7 @@ func AdminLogout(ctx echo.Context) (err error) {
 	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/login")
 }
 
-func AdminDashboardView(ctx echo.Context) (err error) {
-	result, err := databases.DbTkbaiInterface.ViewStudentDataBulk()
-	if err != nil {
-		return err
-	}
-
-	return webtemplate.AdminDashboard("", result).Render(ctx.Request().Context(), ctx.Response().Writer)
-}
-
-func AdminInputView(ctx echo.Context) (err error) {
-	return webtemplate.AddCSV("").Render(ctx.Request().Context(), ctx.Response().Writer)
-}
-
-func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
+func AdminAddStudentBulk(ctx echo.Context) (err error) {
 	file, err := ctx.FormFile("csv")
 	if err != nil {
 		return err
@@ -123,10 +128,10 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		return err
 	}
 
-	err = databases.DbTkbaiInterface.DeleteALlStudentData()
-	if err != nil {
-		return err
-	}
+	//err = databases.DbTkbaiInterface.DeleteALlStudentData()
+	//if err != nil {
+	//	return err
+	//}
 
 	for i, csvRecord := range csvRecords {
 		if i == 0 {
@@ -134,11 +139,10 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 		}
 
 		err = databases.DbTkbaiInterface.CreateStudentData(databases.StudentData{
-			StudentID:            sql.NullString{String: strings.ToUpper(csvRecord[0]), Valid: true},
-			Name:                 sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
-			StudentNumber:        sql.NullString{String: csvRecord[2], Valid: true},
-			Major:                sql.NullString{String: csvRecord[3], Valid: true},
-			DateOfAdministration: sql.NullString{String: csvRecord[4], Valid: true},
+			StudentAddress: sql.NullString{String: strings.ToUpper(csvRecord[0]), Valid: true},
+			Name:           sql.NullString{String: strings.ToUpper(csvRecord[1]), Valid: true},
+			StudentNumber:  sql.NullString{String: csvRecord[2], Valid: true},
+			Major:          sql.NullString{String: csvRecord[3], Valid: true},
 		})
 
 		if err != nil {
@@ -147,4 +151,56 @@ func AdminUploadCSVCertificate(ctx echo.Context) (err error) {
 	}
 
 	return ctx.Redirect(http.StatusSeeOther, config.AppPrefix+"/admin/dashboard")
+}
+
+func AdminAddStudent(ctx echo.Context) (err error) {
+	var payload models.AddStudentPayload
+	err = ctx.Bind(&payload)
+	if err != nil {
+		return err
+	}
+
+	err = databases.DbTkbaiInterface.CreateStudentData(databases.StudentData{
+		StudentAddress: sql.NullString{String: strings.ToUpper(payload.StudentAddress), Valid: true},
+		Name:           sql.NullString{String: strings.ToUpper(payload.StudentName), Valid: true},
+		StudentNumber:  sql.NullString{String: strings.ToUpper(payload.StudentNumber), Valid: true},
+		Major:          sql.NullString{String: strings.ToUpper(payload.StudentMajor), Valid: true},
+	})
+
+	if err != nil {
+		ctx.Set("alertMessage", "Mahasiswa gagal terdaftar")
+		ctx.Set("alertType", "error")
+		ctx.Set("alertTitle", "Gagal")
+		return AdminDashboardView(ctx)
+	}
+
+	ctx.Set("alertMessage", "Mahasiswa berhasil terdaftar")
+	ctx.Set("alertType", "success")
+	ctx.Set("alertTitle", "Sukses")
+
+	return AdminDashboardView(ctx)
+}
+
+func AdminDeleteStudent(ctx echo.Context) (err error) {
+	var payload models.DeleteStudentPayload
+	err = ctx.Bind(&payload)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("ID: " + payload.ID)
+
+	err = databases.DbTkbaiInterface.DeleteStudentData(payload.ID)
+	if err != nil {
+		ctx.Set("alertMessage", "Gagal hapus data mahasiswa")
+		ctx.Set("alertType", "error")
+		ctx.Set("alertTitle", "Gagal")
+		return AdminDashboardView(ctx)
+	}
+
+	ctx.Set("alertMessage", "Berhasil hapus data mahasiswa")
+	ctx.Set("alertType", "success")
+	ctx.Set("alertTitle", "Sukses")
+
+	return AdminDashboardView(ctx)
 }

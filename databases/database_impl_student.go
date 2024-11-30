@@ -6,19 +6,17 @@ import (
 )
 
 type StudentData struct {
-	ID                   sql.NullInt64  `json:"id" db:"id"`
-	StudentID            sql.NullString `json:"studentID" db:"student_id"`
-	Name                 sql.NullString `json:"name" db:"name"`
-	StudentNumber        sql.NullString `json:"studentNumber" db:"student_number" `
-	StudentAddress       sql.NullString `json:"studentAddress" db:"student_address" `
-	Major                sql.NullString `json:"major" db:"major"`
-	DateOfAdministration sql.NullString `json:"dateOfTest" db:"date_of_administration"`
-	InsertDate           sql.NullTime   `json:"insertDate" db:"insert_date"`
+	ID             sql.NullInt64  `json:"id" db:"id"`
+	StudentAddress sql.NullString `json:"studentID" db:"student_address"`
+	Name           sql.NullString `json:"name" db:"name"`
+	StudentNumber  sql.NullString `json:"studentNumber" db:"student_number" `
+	Major          sql.NullString `json:"major" db:"major"`
+	InsertDate     sql.NullTime   `json:"insertDate" db:"insert_date"`
 }
 
 func (tkbaiDbImpl *TkbaiDbImplement) CreateStudentData(data StudentData) (err error) {
-	query := "INSERT INTO tkbai_data (student_id, name, student_number, major, date_of_administration) VALUES (?,?,?,?,?)"
-	_, err = tkbaiDbImpl.ConnectTkbaiDB.Exec(query, data.StudentID, data.Name, data.StudentNumber, data.Major, data.DateOfAdministration)
+	query := "INSERT INTO tkbai_data (student_address, name, student_number, major) VALUES (?,?,?,?)"
+	_, err = tkbaiDbImpl.ConnectTkbaiDB.Exec(query, data.StudentAddress, data.Name, data.StudentNumber, data.Major)
 	if err != nil {
 		config.LogErr(err, "Query Error")
 		return err
@@ -50,6 +48,17 @@ func (tkbaiDbImpl *TkbaiDbImplement) DeleteALlStudentData() (err error) {
 	return err
 }
 
+func (tkbaiDbImpl *TkbaiDbImplement) DeleteStudentData(id string) (err error) {
+	query := "DELETE FROM tkbai_data WHERE id = ?"
+	_, err = tkbaiDbImpl.ConnectTkbaiDB.Exec(query, id)
+	if err != nil {
+		config.LogErr(err, "Query Error")
+		return err
+	}
+
+	return err
+}
+
 func (tkbaiDbImpl *TkbaiDbImplement) ViewAllStudentData(start, length string) (result []StudentData, err error) {
 	query := "SELECT * FROM tkbai_data LIMIT ? OFFSET ?"
 	err = tkbaiDbImpl.ConnectTkbaiDB.Get(&result, query, length, start)
@@ -62,9 +71,9 @@ func (tkbaiDbImpl *TkbaiDbImplement) ViewAllStudentData(start, length string) (r
 	return result, err
 }
 
-func (tkbaiDbImpl *TkbaiDbImplement) ViewStudentDataByIDAndName(studentID, studentName string) (result StudentData, err error) {
-	query := `SELECT * FROM tkbai_data WHERE student_id = ? AND name = ?`
-	err = tkbaiDbImpl.ConnectTkbaiDB.Get(&result, query, studentID, studentName)
+func (tkbaiDbImpl *TkbaiDbImplement) ViewStudentDataByNumberAndName(studentNumber, studentName string) (result StudentData, err error) {
+	query := `SELECT * FROM tkbai_data WHERE student_number = ? AND name = ?`
+	err = tkbaiDbImpl.ConnectTkbaiDB.Get(&result, query, studentNumber, studentName)
 	if err != nil {
 		config.LogErr(err, "QUERY ERROR")
 		return result, err

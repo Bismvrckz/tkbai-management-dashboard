@@ -8,11 +8,10 @@ DROP TABLE IF EXISTS tkbai_user;
 CREATE TABLE
     IF NOT EXISTS tkbai_data (
                                  id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                 student_id VARCHAR(100),
+                                 student_address VARCHAR(100),
                                  name VARCHAR(50),
                                  student_number VARCHAR(50),
                                  major VARCHAR(30),
-                                 date_of_administration VARCHAR(30),
                                  insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

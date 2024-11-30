@@ -1,6 +1,7 @@
 package webtemplate
 
 import (
+	"fmt"
 	"tkbai/config"
 	"tkbai/databases"
 )
@@ -11,7 +12,7 @@ type Alert struct {
 	AlertType  interface{}
 }
 
-templ adminHeader(userEmail string) {
+templ adminHeader() {
 	<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
 		<div class="container-xxl d-flex flex-grow-1 flex-stack">
 			<div class="d-flex align-items-center me-5">
@@ -45,7 +46,6 @@ templ adminHeader(userEmail string) {
 										<div class="fw-bolder d-flex align-items-center fs-5">
 											Admin
 										</div>
-										<a class="fw-bold text-muted text-hover-primary fs-7">{ userEmail }</a>
 									</div>
 								</div>
 							</div>
@@ -62,7 +62,7 @@ templ adminHeader(userEmail string) {
 	</div>
 }
 
-templ AddCSV(email string) {
+templ AddCSV() {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -77,7 +77,7 @@ templ AddCSV(email string) {
 			<div class="d-flex flex-column flex-root">
 				<div class="page d-flex flex-row flex-column-fluid">
 					<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-						@adminHeader(email)
+						@adminHeader()
 						<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
 							<div class="content flex-row-fluid" id="kt_content">
 								<form method="post" action="" enctype="multipart/form-data">
@@ -107,7 +107,7 @@ templ AddCSV(email string) {
 	</html>
 }
 
-templ AdminDashboard(email string, listData []databases.StudentData) {
+templ AdminDashboard(alertType, alertTitle, alertMessage interface{}, listData []databases.StudentData) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -122,46 +122,116 @@ templ AdminDashboard(email string, listData []databases.StudentData) {
 			<div class="d-flex flex-column flex-root">
 				<div class="page d-flex flex-row flex-column-fluid">
 					<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-						@adminHeader(email)
+						@adminHeader()
 						<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
 							<div class="content flex-row-fluid" id="kt_content">
 								<div class="card">
 									<div class="card-header border-0 pt-6">
+										<div class="card-title">
+											<div class="d-flex align-items-center position-relative my-1">
+												<span class="svg-icon svg-icon-1 position-absolute ms-6">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+														<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+													</svg>
+												</span>
+												<input type="text" id="searchUser" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search user"/>
+											</div>
+										</div>
 										<div class="card-toolbar">
-											<div class="d-flex justify-content-evenly" data-kt-subscription-table-toolbar="base">
-												<a href={ templ.URL(config.AppPrefix + "/admin/add/csv") } class="btn btn-primary">
-													<span class="svg-icon svg-icon-2">+</span>Import CSV
+											<div class="d-flex justify-content-between" data-kt-user-table-toolbar="base">
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_add_student">
+													<span class="svg-icon svg-icon-2">+</span> Add User
+												</button>
+												<span class="mx-4"></span>
+												<a type="button" class="btn btn-secondary" href="add/csv">
+													<span class="svg-icon svg-icon-2">+</span> Add User Bulk
 												</a>
-												<a href={ templ.URL(config.AppPrefix + "/admin/add/one") } class="btn btn-info mx-4">
-													<span class="svg-icon svg-icon-2">+</span>Tambah Data
-												</a>
+											</div>
+											<div class="modal fade" id="modal_add_student" tabindex="-1" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered mw-650px">
+													<div class="modal-content">
+														<div class="modal-header" id="kt_modal_add_user_header">
+															<h2 class="fw-bolder">Add User</h2>
+															<div id="closeAddStudentModal" class="btn btn-icon btn-sm btn-active-icon-primary">
+																<span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+																		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+																	</svg>
+																</span>
+															</div>
+														</div>
+														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+															<form id="modal_add_student_form" class="form" method="post" action="add/student">
+																@CSRF()
+																<div class="d-flex flex-column scroll-y me-n7 pe-7">
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Nama Lengkap</label>
+																		<input type="text" name="studentName" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nama Mahasiswa"/>
+																	</div>
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Student Address</label>
+																		<input type="text" name="studentAddress" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Student Address"/>
+																	</div>
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Student Number</label>
+																		<input maxlength="8" type="text" name="studentNumber" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Student Number"/>
+																	</div>
+																	<div class="fv-row mb-7">
+																		<label class="required fw-bold fs-6 mb-2">Major</label>
+																		<input type="text" name="major" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Jurusan"/>
+																	</div>
+																</div>
+																<div class="text-center pt-15">
+																	<button id="discardAddStudentModal" type="reset" class="btn btn-light me-3">Discard</button>
+																	<button type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Submit</span>
+																	</button>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="card-body pt-0">
-										<table class="table align-middle table-row-dashed fs-6 gy-5" id="test-table">
+										<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
 											<thead>
-												<tr class="text-start text-muted fw-bolder fs-7 text-uppercase">
-													<th class="min-w-125px">Student ID</th>
+												<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
 													<th class="min-w-125px">Name</th>
 													<th class="min-w-125px">Student Number</th>
 													<th class="min-w-125px">Major</th>
-													<th class="min-w-125px">Date of Administration</th>
-													<th class="min-w-90px">Action</th>
+													<th class="min-w-125px">Date Of Administration</th>
+													<th class="text-end min-w-100px">Actions</th>
 												</tr>
 											</thead>
 											<tbody class="text-gray-600 fw-bold">
-												for _, each := range listData {
-													<tr>
-														<td>{ each.StudentID.String }</td>
-														<td>{ each.Name.String }</td>
-														<td>{ each.StudentNumber.String }</td>
-														<td>{ each.Major.String }</td>
-														<td>{ each.DateOfAdministration.String }</td>
+												for _,each := range listData {
+													<tr class="cursor-default">
+														<td class="d-flex align-items-center">
+															<div class="d-flex flex-column">
+																<p class="text-gray-800 text-hover-primary mb-1">{ each.Name.String }</p>
+																<span>{ each.StudentAddress.String }</span>
+															</div>
+														</td>
 														<td>
-															<button type="submit" class="btn btn-danger">
-																<span class="svg-icon svg-icon-2">-</span>Hapus
-															</button>
+															<div class="badge badge-light fw-bolder">{ each.StudentNumber.String }</div>
+														</td>
+														<td>
+															<div class="badge badge-light-success fw-bolder">{ each.Major.String }</div>
+														</td>
+														<td>{ each.InsertDate.Time.Format("02, January 2006") } <div class="badge badge-light-info fw-bolder">{ each.InsertDate.Time.Format("15:04") }</div></td>
+														<td class="text-end">
+															<div class="d-flex justify-content-evenly">
+																<button class="btn btn-primary">Edit</button>
+																<form method="post" action="delete/student">
+																	@CSRF()
+																	<input type="hidden" name="id" value={ fmt.Sprint(each.ID.Int64) }/>
+																	<button class="btn btn-secondary">Hapus</button>
+																</form>
+															</div>
 														</td>
 													</tr>
 												}
@@ -176,9 +246,24 @@ templ AdminDashboard(email string, listData []databases.StudentData) {
 			</div>
 			@ScrollTop()
 			@Script()
-			<script nonce={ config.ScriptSrcNonce }>
-                $("#test-table").DataTable();
-            </script>
+			if alertMessage != nil {
+				<input type="hidden" id="alertMessage" value={ alertMessage.(string) }/>
+				<input type="hidden" id="alertTitle" value={ alertTitle.(string) }/>
+				<input type="hidden" id="alertType" value={ alertType.(string) }/>
+				<script nonce={ config.ScriptSrcNonce }>
+		            swal.fire({
+                        title: document.getElementById("alertTitle").value,
+                        text: document.getElementById("alertMessage").value,
+                        icon: document.getElementById("alertType").value,
+                        buttonsStyling: false,
+                        confirmButtonText: "OK",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-light-primary"
+                        }
+                    });
+			    </script>
+			}
+			<script nonce={ config.ScriptSrcNonce } src={ config.WebPublicPrefix + "/assets/js/admin/dashboard.js" }></script>
 		</body>
 	</html>
 }

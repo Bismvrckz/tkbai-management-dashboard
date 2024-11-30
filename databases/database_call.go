@@ -11,4 +11,4 @@ type (
 	}
 )
 
-var DbTkbaiInterface TkbaiInterface
+var DbTkbaiInterface *TkbaiDbImplement

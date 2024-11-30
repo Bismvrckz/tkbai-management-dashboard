@@ -191,10 +191,10 @@ templ StudentDetail(c databases.StudentData) {
 									</div>
 									<div class="card-body p-9">
 										<div class="row mb-7">
-											<label class="col-lg-4 fw-bold text-muted">Student ID</label>
+											<label class="col-lg-4 fw-bold text-muted">Student Address</label>
 											<div class="col-lg-8 fv-row">
 												<span class="fw-bold text-gray-800 fs-6">
-													{ c.StudentID.String }
+													{ c.StudentAddress.String }
 												</span>
 											</div>
 										</div>
@@ -232,7 +232,7 @@ templ StudentDetail(c databases.StudentData) {
 											<label class="col-lg-4 fw-bold text-muted">Tanggal Masuk</label>
 											<div class="col-lg-8">
 												<span class="fw-bolder fs-6 text-gray-800">
-													{ c.DateOfAdministration.String }
+													{ c.InsertDate.Time.Format("02, January 2006") }
 												</span>
 											</div>
 										</div>
