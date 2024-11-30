@@ -10,6 +10,7 @@ type StudentData struct {
 	StudentID            sql.NullString `json:"studentID" db:"student_id"`
 	Name                 sql.NullString `json:"name" db:"name"`
 	StudentNumber        sql.NullString `json:"studentNumber" db:"student_number" `
+	StudentAddress       sql.NullString `json:"studentAddress" db:"student_address" `
 	Major                sql.NullString `json:"major" db:"major"`
 	DateOfAdministration sql.NullString `json:"dateOfTest" db:"date_of_administration"`
 	InsertDate           sql.NullTime   `json:"insertDate" db:"insert_date"`
