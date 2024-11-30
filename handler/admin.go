@@ -188,8 +188,6 @@ func AdminDeleteStudent(ctx echo.Context) (err error) {
 		return err
 	}
 
-	fmt.Println("ID: " + payload.ID)
-
 	err = databases.DbTkbaiInterface.DeleteStudentData(payload.ID)
 	if err != nil {
 		ctx.Set("alertMessage", "Gagal hapus data mahasiswa")
