@@ -54,6 +54,7 @@ func AdminLogin(ctx echo.Context) (err error) {
 		return err
 	}
 
+	// Compute sha256 user password
 	hasher := sha256.New()
 	hasher.Write([]byte(body.Password))
 	shaPassword := base64.StdEncoding.EncodeToString(hasher.Sum(nil))

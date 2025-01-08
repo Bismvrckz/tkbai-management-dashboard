@@ -163,6 +163,7 @@ templ AdminDashboard(alertType, alertTitle, alertMessage interface{}, listData [
 															</div>
 														</div>
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+														// add student modal
 															<form id="modal_add_student_form" class="form" method="post" action="add/student">
 																@CSRF()
 																<div class="d-flex flex-column scroll-y me-n7 pe-7">
@@ -225,7 +226,7 @@ templ AdminDashboard(alertType, alertTitle, alertMessage interface{}, listData [
 														<td>{ each.InsertDate.Time.Format("02, January 2006") } <div class="badge badge-light-info fw-bolder">{ each.InsertDate.Time.Format("15:04") }</div></td>
 														<td class="text-end">
 															<div class="d-flex justify-content-evenly">
-																<button class="btn btn-primary">Edit</button>
+																// <button class="btn btn-primary">Edit</button>
 																<form method="post" action="delete/student">
 																	@CSRF()
 																	<input type="hidden" name="id" value={ fmt.Sprint(each.ID.Int64) }/>

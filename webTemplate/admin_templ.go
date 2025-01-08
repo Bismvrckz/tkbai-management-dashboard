@@ -264,7 +264,7 @@ func AdminDashboard(alertType, alertTitle, alertMessage interface{}, listData []
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></td><td class=\"text-end\"><div class=\"d-flex justify-content-evenly\"><button class=\"btn btn-primary\">Edit</button><form method=\"post\" action=\"delete/student\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></td><td class=\"text-end\"><div class=\"d-flex justify-content-evenly\"><form method=\"post\" action=\"delete/student\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
